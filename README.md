@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Swatter - An Online Interactive Graphics Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+The game is for one player and consists of a graphic setting with a 
+table with various fragile objects on it and an object to be used as 
+swatter that is to be used by the player to strike down various bugs
+as they fly or crawl across the table. The object is to strike the bugs
+without smashing the fragile objects (points deducted), each successful
+strike scores points.
 
-In the project directory, you can run:
+## Layout
 
-### `npm start`
+The layout consists of a window alcove with net curtains and ornaments
+to the left and a set of shelving with ornaments to the right. The
+window alcove should be not more than 390px wide, with the adjacent
+shelving occupying the remaining 610px of the maximum size stage (1000px);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+As the display is shrunk, the scale remains the same, but only those ornaments
+visible on the left are displayed. The swatter is moved accordingly.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Preliminary Visual Design Discursive
 
-### `npm test`
+If the design is highly visual, then the time budget for the drafting
+stage becomes that much longer. So the first choice is between visual
+appeal and establishing the game-play value. In an ideal world both
+the game play and the visuals are ideal, in practice, we must set
+budgetary constraints and game-play is the most significant factor.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I have used DALL-E to obtain visualisations and to experiment to see
+how much drafting can be automated, and have come to the conclusion
+that there is generally not much time saving using DALL-E for draft
+images, but there is substantial visualisation utility, which can be
+used to improve quality.
 
-### `npm run build`
+### Notes on Realism
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For the sake of simplicity (and execution speeds) the game is 2 dimensional.
+Although the visualisations of the incumbent creature could be adjusted
+to "represent" a 3D location, to add a flavour of realism.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Schedule
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The following schedule is based on a budget of 12 man weeks (72 days),
+so the plan contents are juggled accordingly. This chart will be updated
+during the course of the project.
 
-### `npm run eject`
+Start Date: 29/01/2024
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Item                                   | Est. Time       | Actual Time
+| -------------------------------------- | --------------- | ------------ |
+| Preliminary Design and feasibility     | 5               |              |
+| Design and Sketches                    | 14              |              |
+| Integration of Sketches with code      | 10              |              |
+| Game Play and Code                     | 20              |              |
+| Margin of Error                        | 8
