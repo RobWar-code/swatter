@@ -6,9 +6,11 @@ Work Log
 
     Sketch out stage
 
-    Fix problem with svg conversion in code-libraries
+    * Fix problem with svg conversion in code-libraries
     
     Design and draw the graphic elements
+
+    Experiment with the background shelving image
 
     Plan-out the mobile/tablet/desktop layouts
     
