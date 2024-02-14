@@ -2,16 +2,26 @@ Work Log
 
 <h1>Work Due
 
-    Set up git for the project
 
-    Sketch out stage
+    Do the analysis in more detail
+
+    
+<h2>Work Done
+
+    12/02/2024
+
+    * Set up git for the project
 
     * Fix problem with svg conversion in code-libraries
     
-    Design and draw the graphic elements
+    * Design and draw the graphic elements
 
-    Experiment with the background shelving image
+    * Rework the background shelving image
 
-    Plan-out the mobile/tablet/desktop layouts
-    
-<h2>Work Done
+    * Deploy some ornaments on the background shelving image to get a sense of it
+
+    * Plan-out the mobile/tablet/desktop layouts
+
+    * Allocate the graphics to public/static/graphics
+
+    * Do the .json file information object - prop-files.json

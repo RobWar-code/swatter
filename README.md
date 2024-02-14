@@ -2,22 +2,20 @@
 
 ## Introduction
 
-The game is for one player and consists of a graphic setting with a 
-table with various fragile objects on it and an object to be used as 
-swatter that is to be used by the player to strike down various bugs
-as they fly or crawl across the table. The object is to strike the bugs
+The game is for one player and consists of a graphic setting with  
+surfaces (in this case a window alcove with shelving) with various 
+fragile objects on it and an object to be used as a swatter 
+that is to be used by the player to strike down various bugs
+as they fly around the stage. The object is to strike the bugs
 without smashing the fragile objects (points deducted), each successful
 strike scores points.
 
 ## Layout
 
-The layout consists of a window alcove with net curtains and ornaments
-to the left and a set of shelving with ornaments to the right. The
-window alcove should be not more than 390px wide, with the adjacent
-shelving occupying the remaining 610px of the maximum size stage (1000px);
-
-As the display is shrunk, the scale remains the same, but only those ornaments
-visible on the left are displayed. The swatter is moved accordingly.
+The layout consists of a window alcove with curtains and ornaments on
+the shelving within and in front of the alcove. The alcove image
+is 490 x 475 px to allow for mobiles. The scoring graphic appears
+to the right of the stage on wide screens and below it on smaller.
 
 ### Preliminary Visual Design Discursive
 
@@ -95,7 +93,7 @@ of victoriana, monochrome, if traced, or hand-drawn if coloured (pastels).
 
 2) Download the image to edit in GIMP.
 
-3) Cut the individual ornaments out of DALL-E's original and paste into
+3) Cut the individual graphic out of DALL-E's original and paste into
 a file.
 
 4) Trim the image to content and scale as required.
@@ -113,7 +111,51 @@ transparent.
 to be transparent, then use the delete (not del) key to delete it. This
 leaves the transparent background.
 
-Time per ornament is about 15 minutes.
+Time per graphic is about 15 minutes.
+
+### Bugs
+
+Three different bugs are provided, each with a flying and sitting posture.
+These fly across the stage, beginning on the right and following more or less
+random flight paths back and forth in front of the stage. They settle on
+various surfaces, including the ornaments on the shelving, where striking
+them results in the ornaments breaking. The landing zones are recorded in
+the file public/static/graphics/prop-files.json. Once an ornament is broken
+the landing zone is disabled.
+
+One bug at a time appears in the stage zone. Ten bugs are provided for each
+game, with a time limit of 3 minutes to strike them down. Bugs sit still
+for a maximum of 4 seconds.
+
+### Swatter
+
+The graphic for this is ornate, but provides a paddle end for the player
+to strike the bugs. It is directed by moving the cursor about the stage
+area, and the strike action is activated by mouse click or touch-up.
+Touch down on mobiles must be on the swatter. The positioning point on
+the swatter is top center. The graphic has a tilted view to briefly show
+the strike action (1.5 sec).
+
+### Sounds
+Sounds are provided for the bug when it is flying, for a successful swat,
+for an unsuccessful swat, for an ornament breaking and for a bug flying off 
+stage. A sound toggle is provided.
+
+### Score Sheet
+
+The score sheet is a graphic with text, 490 pixels wide.
+
+The text provided uses the Kaushan local font, and contains the
+following:
+
+Current Game Score:
+Bugs Remaining: 
+Last Game Score:
+Highest Game Score:
+
+### Scoring Page
+
+A tabular graphic in game score order, with game number and score.
 
 ## Schedule
 
@@ -126,7 +168,8 @@ Start Date: 29/01/2024
 | Item                                   | Est. Time       | Actual Time
 | -------------------------------------- | --------------- | ------------ |
 | Preliminary Design and feasibility     | 5               |              |
-| Design and Sketches                    | 14              |              |
+| Design and Sketches                    | 14              | 11           |
+| Score sheet                            | 3               |              |
 | Integration of Sketches with code      | 10              |              |
 | Game Play and Code                     | 20              |              |
 | Margin of Error                        | 8

@@ -1,0 +1,463 @@
+[
+	{
+		"type": "bugs",
+		"files": [
+			{
+				"type": "wasp",
+				"flying": {
+					"file": "wasp.png",
+					"width": 48,
+					"height": 24,
+					"aspect": "side",
+					"orientation": "leftward"
+				},
+				"sitting": {
+					"file": "wasp-sitting.png",
+					"width": 31,
+					"height": 48,
+					"aspect": "top",
+					"orientation": "upward"
+				}
+			},
+			{
+				"type": "fly",
+				"flying": {
+					"file": "fly.png",
+					"width": 48,
+					"height": 37,
+					"aspect": "side",
+					"orientation": "rightward"
+				},
+				"sitting": {
+					"file": "fly-sitting.png",
+					"width": 48,
+					"height": 33,
+					"aspect": "top",
+					"orientation": "upward"
+				}
+			},
+			{
+				"type": "beetle",
+				"flying": {
+					"file": "beetle.png",
+					"width": 48,
+					"height": 33,
+					"aspect": "side",
+					"orientation": "rightward"
+				},
+				"sitting": {
+					"file": "beetle-sitting.png",
+					"width": 31,
+					"height": 48,
+					"aspect": "side",
+					"orientation": "rightward"
+				}
+			}
+		]
+	},
+	{
+		"type": "ornaments",
+		"files" : [
+			{
+				"whole": {
+					"file": "orna01.png",
+					"x": 421,
+					"y": 308,
+					"width": 62,
+					"height": 84
+				},
+				"broken": {
+					"file": "orna01-broken.png",
+					"x" : 418,
+					"y" : 338,
+					"width" : 57,
+					"height" : 55
+				}
+			},
+			{
+				"whole" : {
+					"file" : "orna02.png",
+					"x" : 347,
+					"y" : 300,
+					"width" : 71,
+					"height" : 92
+				},
+				"broken" : {
+					"file" : "orna02-broken.png",
+					"x" : 360,
+					"y" : 346,
+					"width" : 55,
+					"height" : 48
+				}
+			},
+			{
+				"whole" : {
+					"file" : "orna03.png",
+					"x" : 282,
+					"y" : 278,
+					"width" : 65,
+					"height" : 113
+				},
+				"broken" : {
+					"file" : "orna03-broken.png",
+					"x" : 298,
+					"y" : 324,
+					"width" : 63,
+					"height" : 68
+				}
+			},
+			{
+				"whole" : {
+					"file" : "orna04.png",
+					"x" : 231,
+					"y" : 241,
+					"width" : 65,
+					"height" : 105
+				},
+				"broken": {
+					"file": "orna04-broken.png",
+					"x" : 232,
+					"y" : 286,
+					"width" : 62,
+					"height" : 62
+				}
+			},
+			{	
+				"whole" : {
+					"file" : "orna05.png",
+					"x" : 170,
+					"y" : 243,
+					"width" : 62,
+					"height": 101
+				},
+				"broken" : {
+					"file" : "orna05-broken.png",
+					"x" : 175,
+					"y" : 296,
+					"width" : 62,
+					"height" : 49
+				}
+			},
+			{
+				"whole" : {
+					"file" : "orna06.png",
+					"x" : 89,
+					"y" : 291,
+					"width" : 107,
+					"height" : 102
+				},
+				"broken": {
+					"file" : "orna06-broken.png",
+					"x" : 95,
+					"y" : 323,
+					"width" : 82,
+					"height" : 69
+				}
+			},
+			{
+				"whole": {
+					"file" : "orna07.png",
+					"x" : 2,
+					"y" : 287,
+					"width" : 89,
+					"height" : 112
+				},
+				"broken" : {
+					"file" : "orna07-broken.png",
+					"x" : 10,
+					"y" : 327,
+					"width" : 90,
+					"height" : 72
+				}
+			}
+		]
+	},
+	{
+		"type": "swatter",
+		"files" : [
+			{
+				"type" : "standard",
+				"file" : "swatter.png",
+				"x" : 180,
+				"y" : 240,
+				"width" : 70,
+				"height" : 160,
+				"active-offset-y" : 10,
+				"active-width: " : 60
+			},
+			{
+				"type" : "tilted",
+				"file" : "swatter-tilted.png",
+				"width" : 70,
+				"height" : 110
+			}
+		]
+	},
+	{
+		"type" : "stage",
+		"file" : "alcove.png",
+		"width" : 490,
+		"height" : 475,
+		"landing-areas" : [
+			{
+				"x" : 40,
+				"y" : 43,
+				"width" : 29,
+				"height" : 25,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 37,
+				"y" : 76,
+				"width" : 38,
+				"height" : 22,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 35,
+				"y" : 109,
+				"width" : 32,
+				"height" : 24,
+				"onOrnament": "no"
+			},
+			{
+				"x": 43,
+				"y" : 149,
+				"width" : 25,
+				"height" : 75,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 43,
+				"y" : 40,
+				"width" : 25,
+				"height" : 53,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 40,
+				"y" : 304,
+				"width" : 30,
+				"height" : 63,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 18,
+				"y" : 337,
+				"width" : 56,
+				"height" : 49,
+				"onOrnament" : "orna07"
+			},
+			{
+				"x" : 20,
+				"y" : 407,
+				"width" : 35,
+				"height" : 23,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 97,
+				"y" : 41,
+				"width" : 43,
+				"height" : 26,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 93,
+				"y" : 74,
+				"width" : 49,
+				"height" : 60,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 101,
+				"y" : 153,
+				"width" : 30,
+				"height" : 47,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 101,
+				"y" : 231,
+				"width" : 43,
+				"height" : 134,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 105,
+				"y" : 309,
+				"width" : 71,
+				"height" : 59,
+				"onOrnament": "orna06"
+			},
+			{
+				"x" : 87,
+				"y" : 407,
+				"width" : 311,
+				"height" : 43,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 148,
+				"y" : 45,
+				"width" : 207,
+				"height" : 22,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 155,
+				"y" : 90,
+				"width" : 24,
+				"height" : 17,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 180,
+				"y" : 142,
+				"width" : 43,
+				"height" : 65,
+				"onOrnament": "no"
+			},
+			{
+				"x" : 185,
+				"y" : 250,
+				"width" : 138,
+				"height" : 63,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 186,
+				"y" : 276,
+				"width" : 28,
+				"height" : 50,
+				"onOrnament" : "orna05"
+			},
+			{
+				"x" : 195,
+				"y" : 383,
+				"width" : 104,
+				"height" : 11,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 232,
+				"y" : 200,
+				"width" : 41,
+				"height" : 42,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 221,
+				"y" : 238,
+				"width" : 91,
+				"heignt" : 36,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 242,
+				"y" : 277,
+				"width" : 36,
+				"height" : 57,
+				"onOrnament" : "orna04"
+			},
+			{
+				"x" : 273,
+				"y" : 132,
+				"width" : 49,
+				"height" : 70,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 301,
+				"y" : 307,
+				"width" : 32,
+				"height" : 41,
+				"onOrnament" : "orna03"
+			},
+			{
+				"x" : 374,
+				"y" : 45,
+				"width" : 45,
+				"height" : 21,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 371,
+				"y" : 82,
+				"width" : 46,
+				"height" : 15,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 371,
+				"y" : 105,
+				"width" : 45,
+				"height" : 62,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 381,
+				"y" : 189,
+				"width" : 27,
+				"height" : 24,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 384,
+				"y" : 245,
+				"width" : 28,
+				"height" : 42,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 361,
+				"y" : 348,
+				"width" : 46,
+				"height" : 41,
+				"onOrnament" : "orna02"
+			},
+			{
+				"x" : 442,
+				"y" : 50,
+				"width" : 15,
+				"height" : 15,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 439,
+				"y" : 77,
+				"width" : 19,
+				"height" : 20,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 437,
+				"y" : 112,
+				"width" : 21,
+				"height" : 22,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 444,
+				"y" : 152,
+				"width" : 12,
+				"height" : 60,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 441,
+				"y" : 229,
+				"width" : 16,
+				"height" : 50,
+				"onOrnament" : "no"
+			},
+			{
+				"x" : 437,
+				"y" : 353,
+				"width" : 32,
+				"height" : 31,
+				"onOrnament" : "orna01"
+			}
+		]
+	}
+]
