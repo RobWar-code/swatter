@@ -157,6 +157,11 @@ Highest Game Score:
 
 A tabular graphic in game score order, with game number and score.
 
+## Code Set-up
+    npm install react-router-dom
+    npm install pixi.js @pixi/react
+    npm install react-bootstrap
+    
 ## Schedule
 
 The following schedule is based on a budget of 12 man weeks (72 days),

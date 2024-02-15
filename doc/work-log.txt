@@ -3,9 +3,18 @@ Work Log
 <h1>Work Due
 
 
-    Do the analysis in more detail
+    * Do the analysis in more detail
 
-    
+    * Install react router-dom etc.
+
+    * Copy the Kaushan font
+
+    * Study the new way of laying-out react-router-dom page routes.
+
+    Do the score scroll graphic
+
+    Do the browser tab logo
+
 <h2>Work Done
 
     12/02/2024
