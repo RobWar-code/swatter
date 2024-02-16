@@ -11,9 +11,15 @@ Work Log
 
     * Study the new way of laying-out react-router-dom page routes.
 
-    Do the score scroll graphic
+    * Do the score scroll graphic
 
-    Do the browser tab logo
+    * Do the browser tab logo
+
+    Code the graphics data list fetch
+
+    Do the stage on the game page, set-up the states
+
+    Figure and code the flight paths for the bugs
 
 <h2>Work Done
 
