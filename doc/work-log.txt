@@ -15,7 +15,9 @@ Work Log
 
     * Do the browser tab logo
 
-    Code the graphics data list fetch
+    * Code the graphics data list fetch
+
+    Rework the graphics and data to allow for error - stage width set to 490 instead of 390.
 
     Do the stage on the game page, set-up the states
 

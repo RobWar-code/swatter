@@ -61,113 +61,113 @@
 			{
 				"whole": {
 					"file": "orna01.png",
-					"x": 421,
-					"y": 308,
-					"width": 62,
-					"height": 84
+					"x": 335,
+					"y": 246,
+					"width": 50,
+					"height": 68
 				},
 				"broken": {
 					"file": "orna01-broken.png",
-					"x" : 418,
-					"y" : 338,
-					"width" : 57,
-					"height" : 55
+					"x" : 334,
+					"y" : 269,
+					"width" : 51,
+					"height" : 45
 				}
 			},
 			{
 				"whole" : {
 					"file" : "orna02.png",
-					"x" : 347,
-					"y" : 300,
-					"width" : 71,
-					"height" : 92
+					"x" : 280,
+					"y" : 235,
+					"width" : 56,
+					"height" : 76
 				},
 				"broken" : {
 					"file" : "orna02-broken.png",
-					"x" : 360,
-					"y" : 346,
-					"width" : 55,
-					"height" : 48
+					"x" : 294,
+					"y" : 277,
+					"width" : 41,
+					"height" : 38
 				}
 			},
 			{
 				"whole" : {
 					"file" : "orna03.png",
-					"x" : 282,
-					"y" : 278,
-					"width" : 65,
-					"height" : 113
+					"x" : 231,
+					"y" : 217,
+					"width" : 56,
+					"height" : 96
 				},
 				"broken" : {
 					"file" : "orna03-broken.png",
-					"x" : 298,
-					"y" : 324,
-					"width" : 63,
-					"height" : 68
+					"x" : 244,
+					"y" : 255,
+					"width" : 52,
+					"height" : 59
 				}
 			},
 			{
 				"whole" : {
 					"file" : "orna04.png",
-					"x" : 231,
-					"y" : 241,
-					"width" : 65,
-					"height" : 105
+					"x" : 181,
+					"y" : 191,
+					"width" : 50,
+					"height" : 85
 				},
 				"broken": {
 					"file": "orna04-broken.png",
-					"x" : 232,
-					"y" : 286,
-					"width" : 62,
-					"height" : 62
+					"x" : 180,
+					"y" : 223,
+					"width" : 54,
+					"height" : 51
 				}
 			},
 			{	
 				"whole" : {
 					"file" : "orna05.png",
-					"x" : 170,
-					"y" : 243,
-					"width" : 62,
-					"height": 101
+					"x" : 134,
+					"y" : 183,
+					"width" : 47,
+					"height": 92
 				},
 				"broken" : {
 					"file" : "orna05-broken.png",
-					"x" : 175,
-					"y" : 296,
-					"width" : 62,
-					"height" : 49
+					"x" : 130,
+					"y" : 227,
+					"width" : 54,
+					"height" : 48
 				}
 			},
 			{
 				"whole" : {
 					"file" : "orna06.png",
-					"x" : 89,
-					"y" : 291,
-					"width" : 107,
-					"height" : 102
+					"x" : 51,
+					"y" : 225,
+					"width" : 88,
+					"height" : 87
 				},
 				"broken": {
 					"file" : "orna06-broken.png",
-					"x" : 95,
-					"y" : 323,
-					"width" : 82,
-					"height" : 69
+					"x" : 65,
+					"y" : 238,
+					"width" : 73,
+					"height" : 72
 				}
 			},
 			{
 				"whole": {
 					"file" : "orna07.png",
-					"x" : 2,
-					"y" : 287,
-					"width" : 89,
-					"height" : 112
+					"x" : 0,
+					"y" : 223,
+					"width" : 74,
+					"height" : 94
 				},
 				"broken" : {
 					"file" : "orna07-broken.png",
-					"x" : 10,
-					"y" : 327,
-					"width" : 90,
-					"height" : 72
+					"x" : 18,
+					"y" : 262,
+					"width" : 63,
+					"height" : 58
 				}
 			}
 		]
