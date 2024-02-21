@@ -157,6 +157,40 @@ Highest Game Score:
 
 A tabular graphic in game score order, with game number and score.
 
+## Bug Motion
+
+### Flight Paths
+
+The flight paths of the bugs cover in the whole stage area in a looping 
+motion, beginning on the right and the buzzing back and forth and around
+for the time period allocated. The motion steps are set to be made at
+tick intervals (1/60 sec).
+
+The trajectory of the bug is biased in the horizontal, drifting toward
+the vertical as it approaches the edges of the stage and having a small
+random chance of change elsewhere. The changes in direction are
+accelerations, so that curved trajectories are produced.
+
+When the direction of motion brings the bug to a minimum of 8% of the
+width of the stage, the curvature of the path is set to ensure that
+it is does not direct the bug across the edge of the stage. ie:
+
+sX = uXt + aXt^2 = edgeX - dX 
+=> aX = ((edgeX - dX) - uXt)/t^2
+
+Where t is edgeX - dX / meanVelocity
+
+And dX is determined as the minimum approach to the edge.
+
+An edgeAvoidance flag is set once this is established, so that random changes
+are not made to the flight path, other than different edge avoidance. This
+remains in place until the path is in the opposite direction to the edge.
+
+Apart from this, as the bug flies, it's accelerations can be modified by
+5% every 10 ticks with a bias for the same sign, with a maximum speed 
+calculated from the width of the stage, and a minimum speed of 1/5 of this.
+
+
 ## Code Set-up
     npm install react-router-dom
     npm install pixi.js @pixi/react

@@ -2,7 +2,13 @@ Work Log
 
 <h1>Work Due
 
+    Display the ornaments on the stage
 
+
+<h2>Work Done
+
+    21/02/2024
+    
     * Do the analysis in more detail
 
     * Install react router-dom etc.
@@ -17,13 +23,11 @@ Work Log
 
     * Code the graphics data list fetch
 
-    Rework the graphics and data to allow for error - stage width set to 490 instead of 390.
+    * Rework the graphics and data to allow for error - stage width set to 490 instead of 390.
 
-    Do the stage on the game page, set-up the states
+    * Do the stage on the game page, set-up the states
 
-    Figure and code the flight paths for the bugs
-
-<h2>Work Done
+    * Figure and code the flight paths for the bugs
 
     12/02/2024
 
