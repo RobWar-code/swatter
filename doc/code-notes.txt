@@ -1,0 +1,100 @@
+General Notes on Coding for this project
+
+    Contents
+        Using the Webpack Context for Images
+        Mapping Sets of Sprites
+        Connecting to PIXI.js code
+
+<h1>Using the Webpack Context for Images
+
+    In this project there is a requirement to access a set of image 
+    files. The problem is to handle these in arrays. They cannot be
+    referenced directly by name in the @pixi/react Sprites. Instead
+    we must derive systems path names for them. This facility is
+    provided by the Webpack require.context function - ie:
+
+        // Fetch the context
+        const ornamentImages = require.context('../assets/images/', false, /\.png$/);
+
+        // Accessing the path names in the context
+        filePath = ornamentImages('./orna02.png');
+
+        ...
+
+        <Sprite 
+            image={filePath}
+            ...
+        />
+
+<h1>Mapping Sets of Sprites
+
+    We can use the .map method to use an array of images as Sprites, ie:
+
+    spriteArray = [
+        {
+            id: 1,
+            image: ornamentImages('./orna01.png');
+            x: 50,
+            y: 100
+        },
+        {
+            id: 1,
+            image: ornamentImages('./orna02.png');
+            x: 100,
+            y: 100
+        },
+        ...
+    ]
+
+    ...
+
+    <Stage width={400} height={300}>
+        {spriteArray.map(item => (
+            <Sprite key={item.id}
+                image={item.image}
+                x={item.x}
+                y={item.y}
+            />
+        ))}
+    </Stage>
+
+<h1>Connecting to PIXI.js code
+
+    Use a ref to connect to a stage built by PIXI.js
+
+        import {useRef, useEffect} from 'react';
+        import * as PIXI from 'pixi.js';
+
+        function MyComponent() {
+            const myContainer = useRef(null);
+            const pixiAppStage = useRef(null);
+
+            useEffect( () => {
+                if (myContainer) {
+                    // Create the stage
+                    pixiAppStage.current = new PIXI.Application({
+                        width: stageWidth,
+                        height: stageHeight
+                    });
+                    myContainer.current.appendChild(pixiAppStage.current.view);
+
+                    // Example Sprite
+                    const alcoveSprite = PIXI.Sprite.from(alcove);
+                    alcoveSprite.anchor = {x: 0, y: 0};
+                    alcoveSprite.scale = {x: stageScale, y: stageScale};
+                    alcoveSprite.x = 0;
+                    alcoveSprite.y = 0;
+
+                    pixiAppStage.current.stage.addChild(alcoveSprite);
+
+                }
+                return () => {
+                    // Cleanup
+                    pixiAppRef.current.destroy(true, true);
+                }
+            }, [stageWidth, stageHeight, stageScale])
+
+            return (
+                <div ref={myContainer}></div>
+            )
+        }

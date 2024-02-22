@@ -4,10 +4,11 @@ import {Container, Row, Col} from 'react-bootstrap';
 import GameStage from '../components/GameStage';
 
 export default function GamePage() {
+    const [,,graphicData] = useOutletContext();
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
     const [stageScale, setStageScale] = useState(1);
-    const [,,graphicData] = useOutletContext();
+    const [globalImageData, setGlobalImageData] = useState([]);
     const alcoveWidth = useRef(0);
     const alcoveHeight = useRef(0);
     const stageCol = useRef(null);
@@ -43,6 +44,8 @@ export default function GamePage() {
             determineStageSize();
         }
 
+        setGlobalImageData(graphicData);
+
     }, [graphicData])
 
     // Get the scale and stage size etc.
@@ -61,11 +64,12 @@ export default function GamePage() {
     return (
         <Container>
             <Row>
-                <Col className="text-center" id="stageCol" ref={stageCol} md={6}>
+                <Col ref={stageCol} className="text-center" md={6}>
                     <GameStage
                         stageWidth={stageWidth}
                         stageHeight={stageHeight}
                         stageScale={stageScale}
+                        globalImageData={globalImageData}
                     />
                 </Col>
             </Row>

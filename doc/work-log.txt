@@ -4,6 +4,8 @@ Work Log
 
     Display the ornaments on the stage
 
+        Use the public/static/images directory for the ornaments & bugs
+
 
 <h2>Work Done
 
