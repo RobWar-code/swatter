@@ -4,6 +4,7 @@ General Notes on Coding for this project
         Using the Webpack Context for Images
         Mapping Sets of Sprites
         Connecting to PIXI.js code
+        Sprite Array Fragment
 
 <h1>Using the Webpack Context for Images
 
@@ -25,6 +26,10 @@ General Notes on Coding for this project
             image={filePath}
             ...
         />
+
+    Alternatively we can use the public folder and the following to access the
+    file handle:
+        let filePath = `${process.env.PUBLIC_URL}/static/images/${fileName}`;
 
 <h1>Mapping Sets of Sprites
 
@@ -98,3 +103,36 @@ General Notes on Coding for this project
                 <div ref={myContainer}></div>
             )
         }
+
+<h1>Sprite Array Fragment
+
+    The important thing to note here is that we should useState array (ie:
+    ornamentDataState) to supply the data to the sprites.
+    
+        <>
+        {!initial && (
+            <>
+            {ornamentDataState.map((item, index) => {
+                let representation = item.whole;
+                if (item.isBroken) {
+                    representation = item.broken;
+                }
+                let x = representation.actualX;
+                let y = representation.actualY + representation.actualHeight;
+                let key = item.id ? item.id : index;
+                console.log("key:", key);
+                return (
+                    <Sprite key={key}
+                        image={representation.image}
+                        scale={{x: stageScale, y: stageScale}}
+                        anchor={{x: 0, y: 1}}
+                        x={x}
+                        y={y}
+                    />
+                )
+            })}
+            </>
+            )
+        }
+        </>
+
