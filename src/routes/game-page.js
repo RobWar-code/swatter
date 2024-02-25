@@ -24,7 +24,6 @@ export default function GamePage() {
             }
             let sWidth = scale * alcoveWidth.current;
             let sHeight = scale * alcoveHeight.current;
-            console.log("Stage Details:", alcoveWidth.current, stageColWidth, sWidth, sHeight, scale);
             setStageWidth(sWidth);
             setStageHeight(sHeight);
             setStageScale(scale);
@@ -37,7 +36,6 @@ export default function GamePage() {
             if (graphicData[i].type === "stage") {
                 alcoveWidth.current = graphicData[i].width;
                 alcoveHeight.current = graphicData[i].height;
-                console.log("Alcove:", alcoveWidth.current, alcoveHeight.current);
                 break;
             }
             // Determine Stage Size
@@ -54,7 +52,6 @@ export default function GamePage() {
             determineStageSize();
         })
 
-        console.log("Got to effect");
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize)

@@ -1,6 +1,7 @@
 import {Sprite} from '@pixi/react';
 import {useState, useRef, useEffect} from 'react';
 import {useApp} from '@pixi/react';
+import * as PIXI from 'pixi.js';
 import GLOBALS from '../constants/constants';
 
 export default function Bug({
@@ -12,6 +13,7 @@ export default function Bug({
     globalImageData
 }) {
     const [initial, setInitial] = useState(true);
+    const [counter, setCounter] = useState(0);
     const bugData = useRef();
     const activeBugData = useRef();
     const [activeBugDataState, setActiveBugDataState] = useState({});
@@ -20,12 +22,15 @@ export default function Bug({
     const numBugs = useRef();
     const app = useApp();
 
-    console.log("Got to Bug");
-
+    const imageNameFromFile = (filename) => {
+        let p = filename.indexOf('.');
+        let f = filename.substring(0,p - 1);
+        f = f.replace("-", "_");
+        return f;
+    }
     // Set-up the bug data initially
     useEffect( () => {
         if (initial && globalImageData.length) {
-            console.log("Initialise bugs", globalImageData.length)
             // Search for the bug information in the graphic data
             let gotBugs = false;
             let bugIndex = 0;
@@ -42,24 +47,33 @@ export default function Bug({
                 bugData.current = [];
                 for (let i = 0; i < bugFiles.length; i++) {
                     bugData.current.push(bugFiles[i]);
-                    bugData.current[i].flying.image = `${process.env.PUBLIC_URL}/static/graphics/${bugFiles[i].flying.file}`;
-                    bugData.current[i].sitting.image = `${process.env.PUBLIC_URL}/static/graphics/${bugFiles[i].sitting.file}`;
-                    bugData.current[i].activity = "inactive";
+                    let texture = PIXI.Texture.from(`/static/graphics/${bugFiles[i].flying.file}`);
+                    bugData.current[i].flying.image = texture;
+                    /*
+                    let imageName = imageNameFromFile(bugFiles[i].flying.file);
+                    if (!PIXI.loader.resources[imageName]) {
+                        PIXI.loader.add(imageName, `${process.env.PUBLIC_URL}/static/graphic/${bugFiles[i].flying.file}`);
+                        bugData.current[i].flying.image = PIXI.loader.resources[imageName].texture;
+                    }
+                    imageName = imageNameFromFile(bugFiles[i].sitting.file);
+                    if (!PIXI.loader.resources[imageName]) {
+                        PIXI.loader.add(imageName, `${process.env.PUBLIC_URL}/static/graphic/${bugFiles[i].stting.file}`);
+                        bugData.current[i].flying.image = PIXI.loader.resources[imageName].texture;
+                    }
+                    */
                 }
                 numBugs.current = bugData.current.length;
-                console.log("Got numBugs:", numBugs.current, bugData.current.length)
                 setBugStart(true);
             }
             setInitial(false);
         }
-    }, [initial, globalImageData, setBugStart])
+    }, [initial, globalImageData, setBugStart, app])
 
     // Set-up a new bug for activity
     useEffect(() => {
         if (bugStart) {
             // Choose a bug
             bugNum.current = Math.floor(Math.random() * numBugs.current);
-            console.log("bugNum:", bugNum.current, numBugs.current);
             activeBugData.current = {};
             // Set the bug on the right of the stage
             activeBugData.current.x = stageWidth;
@@ -67,8 +81,8 @@ export default function Bug({
             // Set the image data
             activeBugData.current.image = bugData.current[bugNum.current].flying.image;
             // Set the initial speed parameters (pixels per tick)
-            activeBugData.current.vx = -(Math.floor(Math.random() * (GLOBALS.maxSpeed - 1)) + 1);
-            activeBugData.current.vy = Math.floor(Math.random() * (GLOBALS.maxSpeed - 1) + 1);
+            activeBugData.current.vx = -(Math.random() * (GLOBALS.maxSpeed * 0.5) + GLOBALS.maxSpeed * 0.5);
+            activeBugData.current.vy = Math.random() * (GLOBALS.maxSpeed * 0.5) + GLOBALS.maxSpeed;
             if (Math.random() > 0.5) activeBugData.current.vy *= -1;
             // Set the orientation
             if ((activeBugData.current.vx < 0 && bugData.current[bugNum.current].flying.orientation === "rightward") ||
@@ -84,12 +98,12 @@ export default function Bug({
             activeBugData.current.ay = 0;
             // Orientation
             // Status
-            activeBugData.status = "flying";
+            activeBugData.current.status = "flying";
             // Time allocation
-            activeBugData.startTime = Date.now();
-            activeBugData.timeAllowance = Math.floor(Math.random() * 0.5) * GLOBALS.maxBugTime + 0.5 * GLOBALS.maxBugTime;
+            activeBugData.current.numBugSteps = Math.floor(Math.random() * 0.5) * GLOBALS.maxBugSteps + 0.5 * GLOBALS.maxBugSteps;
             setBugStart(false);
             setActiveBugDataState(activeBugData.current);
+            console.log("activeBugDataState:", activeBugData);
             setBugActive(true);
         }
 
@@ -98,22 +112,31 @@ export default function Bug({
     // Handle the active state of the current bug
     useEffect(() => {
         const moveBug = () => {
-            let bug = activeBugData.current;
-            // Adjust position
-            bug.x = bug.x + bug.vx;
-            bug.y = bug.y + bug.vy;
-            // Update the state
-            setActiveBugDataState(activeBugData.current);
-            // Check the time limit
-            let t = Date.now();
-            if (t - bug.startTime >= bug.timeAllowance) {
-                setBugActive(false);
+            if (bugActive) {
+                // Adjust position
+                activeBugData.current.x = activeBugData.current.x + activeBugData.current.vx;
+                activeBugData.current.y = activeBugData.current.y + activeBugData.current.vy;
+                if (activeBugData.current.x < 0 || activeBugData.current >= stageWidth) {
+                    activeBugData.current.vx = -activeBugData.current.vx;
+                }
+                if (activeBugData.current.y < 0 || activeBugData.current.y >= stageHeight) {
+                    activeBugData.current.vy = -activeBugData.current.vy;
+                }
+                // Update the state
+                setActiveBugDataState(activeBugData.current);
+                let c = counter + 1; 
+                setCounter(c);
+                if (c > activeBugData.current.numBugSteps) {
+                    setBugActive(false);
+                }
             }
-
         };
 
         if (bugActive) {
             app.ticker.add(moveBug);
+        }
+        else {
+            app.ticker.remove(moveBug);
         }
 
         // Cleanup on unmount
@@ -124,13 +147,13 @@ export default function Bug({
         };
 
     
-    }, [bugActive, app])
+    }, [bugActive, counter, stageWidth, stageHeight, app])
 
     return (
         <>
         { bugActive && (
             <Sprite
-                image={activeBugDataState.image}
+                texture={activeBugDataState.image}
                 scale={{x: activeBugDataState.scaleX, y:activeBugDataState.scaleY}}
                 anchor={{x:0.5, y:0.5}}
                 x={activeBugDataState.x}

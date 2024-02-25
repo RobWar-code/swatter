@@ -60,7 +60,6 @@ export default function Ornaments({
                 let x = representation.actualX;
                 let y = representation.actualY + representation.actualHeight;
                 let key = item.id ? item.id : index;
-                console.log("key:", key);
                 return (
                     <Sprite key={key}
                         image={representation.image}
