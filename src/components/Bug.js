@@ -28,6 +28,21 @@ export default function Bug({
         f = f.replace("-", "_");
         return f;
     }
+
+    const imageLoader = (filename) => {
+        let texture;
+        try {
+            texture = PIXI.Texture.from(`${process.env.PUBLIC_URL}/static/graphics/${filename}`);
+            if (texture.width === 0 || texture.height === 0) {
+                console.log("Error: unable to load texture:", filename)
+            }
+        }
+        catch (error) {
+            console.error("Unable to load texture:", filename, error);
+        }
+        return texture;
+    }
+
     // Set-up the bug data initially
     useEffect( () => {
         if (initial && globalImageData.length) {
@@ -47,20 +62,10 @@ export default function Bug({
                 bugData.current = [];
                 for (let i = 0; i < bugFiles.length; i++) {
                     bugData.current.push(bugFiles[i]);
-                    let texture = PIXI.Texture.from(`/static/graphics/${bugFiles[i].flying.file}`);
-                    bugData.current[i].flying.image = texture;
-                    /*
-                    let imageName = imageNameFromFile(bugFiles[i].flying.file);
-                    if (!PIXI.loader.resources[imageName]) {
-                        PIXI.loader.add(imageName, `${process.env.PUBLIC_URL}/static/graphic/${bugFiles[i].flying.file}`);
-                        bugData.current[i].flying.image = PIXI.loader.resources[imageName].texture;
-                    }
-                    imageName = imageNameFromFile(bugFiles[i].sitting.file);
-                    if (!PIXI.loader.resources[imageName]) {
-                        PIXI.loader.add(imageName, `${process.env.PUBLIC_URL}/static/graphic/${bugFiles[i].stting.file}`);
-                        bugData.current[i].flying.image = PIXI.loader.resources[imageName].texture;
-                    }
-                    */
+                    const texture1 = imageLoader(bugFiles[i].flying.file);
+                    bugData.current[i].flying.image = texture1;
+                    const texture2 = imageLoader(bugFiles[i].sitting.file);
+                    bugData.current[i].sitting.image = texture2;
                 }
                 numBugs.current = bugData.current.length;
                 setBugStart(true);
@@ -93,9 +98,12 @@ export default function Bug({
                 activeBugData.current.scaleX = 1;
             }
             activeBugData.current.scaleY = 1;
+            activeBugData.current.defaultOrientation = bugData.current[bugNum.current].flying.orientation;
             // Accelleration
             activeBugData.current.ax = 0;
             activeBugData.current.ay = 0;
+            // Stepped motion changes
+            activeBugData.current.lastMotionChangeStep = 0;
             // Orientation
             // Status
             activeBugData.current.status = "flying";
@@ -113,21 +121,95 @@ export default function Bug({
     useEffect(() => {
         const moveBug = () => {
             if (bugActive) {
+                // Check for changes to motion
+                if (counter - activeBugData.current.lastMotionChangeStep > GLOBALS.motionChangeSteps && Math.random() > 0.1) {
+                    console.log("Got to change acceleration")
+                    let deltax = GLOBALS.maxAccelerationChange * 0.2 + Math.random() * (GLOBALS.maxAccelerationChange * 0.8);
+                    if (activeBugData.current.x > stageWidth || activeBugData.current.x < 0) {
+                        deltax = 0;
+                    }
+                    else if (Math.random() > 0.5) {
+                        deltax = -deltax;
+                    }
+                    if (deltax + activeBugData.current.ax < GLOBALS.maxAcceleration && 
+                        deltax + activeBugData.current.ax > -GLOBALS.maxAcceleration) {
+                        activeBugData.current.ax += deltax;
+                        activeBugData.current.lastMotionChangeStep = counter;
+                        console.log("Change acceleration", activeBugData.current.ax, deltax);
+                    }
+
+                    let deltay = GLOBALS.maxAccelerationChange * 0.2 + Math.random() * (GLOBALS.maxAccelerationChange * 0.8);
+                    if (activeBugData.current.y < 0 || activeBugData.current.y > stageHeight) {
+                        deltay = 0;
+                    }
+                    else if (Math.random() > 0.5) {
+                        deltay = -deltay;
+                    }
+
+                    if (deltay + activeBugData.current.ay < GLOBALS.maxAcceleration && 
+                        deltay + activeBugData.current.ay > -GLOBALS.maxAcceleration) {
+                        activeBugData.current.ay += deltay;
+                        activeBugData.current.lastMotionChangeStep = counter;
+                    }
+                }
+                // Adjust velocity
+                activeBugData.current.vx += activeBugData.current.ax;
+                if (activeBugData.current.vx > GLOBALS.maxSpeed) {
+                    activeBugData.current.vx = GLOBALS.maxSpeed;
+                    activeBugData.current.ax = 0;
+                }
+                else if (activeBugData.current.vx < -GLOBALS.maxSpeed) {
+                    activeBugData.current.vx = -GLOBALS.maxSpeed;
+                    activeBugData.current.ax = 0;
+                }
+
+                activeBugData.current.vy += activeBugData.current.ay;
+                if (activeBugData.current.vy > GLOBALS.maxSpeed) {
+                    activeBugData.current.vy = GLOBALS.maxSpeed;
+                    activeBugData.current.ay = 0;
+                }
+                else if (activeBugData.current.vy < -GLOBALS.maxSpeed) {
+                    activeBugData.current.vy = -GLOBALS.maxSpeed;
+                    activeBugData.current.ay = 0;
+                }
+
                 // Adjust position
                 activeBugData.current.x = activeBugData.current.x + activeBugData.current.vx;
                 activeBugData.current.y = activeBugData.current.y + activeBugData.current.vy;
-                if (activeBugData.current.x < 0 || activeBugData.current >= stageWidth) {
-                    activeBugData.current.vx = -activeBugData.current.vx;
+                if (activeBugData.current.x < 0) {
+                    activeBugData.current.vx = Math.abs(activeBugData.current.vx);
+                    activeBugData.current.ax = Math.abs(activeBugData.current.ax);
                 }
-                if (activeBugData.current.y < 0 || activeBugData.current.y >= stageHeight) {
-                    activeBugData.current.vy = -activeBugData.current.vy;
+                else if (activeBugData.current.x >= stageWidth) {
+                    activeBugData.current.vx = -Math.abs(activeBugData.current.vx);
+                    activeBugData.current.ax = -Math.abs(activeBugData.current.ax);
                 }
+                if (activeBugData.current.y < 0) {
+                    activeBugData.current.vy = Math.abs(activeBugData.current.vy);
+                    activeBugData.current.ay = Math.abs(activeBugData.current.ay);
+                }
+                else if (activeBugData.current.y > stageWidth) {
+                    activeBugData.current.vy = -Math.abs(activeBugData.current.vy);
+                    activeBugData.current.ay = -Math.abs(activeBugData.current.ay);
+                }
+
+                if ((activeBugData.current.vx < 0 && activeBugData.current.defaultOrientation === "rightward") ||
+                    (activeBugData.current.vx > 0 && activeBugData.current.defaultOrientation === "leftward")) {
+                    activeBugData.current.scaleX = -1;
+                    activeBugData.current.scaleY = 1;
+                }
+                else {
+                    activeBugData.current.scaleX = 1;
+                    activeBugData.current.scaleY = 1;
+                }
+
                 // Update the state
                 setActiveBugDataState(activeBugData.current);
                 let c = counter + 1; 
                 setCounter(c);
                 if (c > activeBugData.current.numBugSteps) {
                     setBugActive(false);
+                    setCounter(0);
                 }
             }
         };

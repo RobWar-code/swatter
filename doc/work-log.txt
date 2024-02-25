@@ -6,6 +6,25 @@ Work Log
 
         * Use the public/static/images directory for the ornaments & bugs
 
+    * For bugs, use Texture as this avoids intermittent loading problems in animation 
+
+    Code the bug Flight paths
+
+    Incorporate the swatter graphic
+
+        Allow for swatter motion
+
+        Allow for swatter action
+
+    Include game start and next game modals
+
+    Allow for scoring
+
+    Allow for score chart display
+
+    Incorporate sounds
+
+    Add sound enable control
 
 <h2>Work Done
 

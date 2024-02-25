@@ -5,6 +5,7 @@ General Notes on Coding for this project
         Mapping Sets of Sprites
         Connecting to PIXI.js code
         Sprite Array Fragment
+        Animated Bitmap Images
 
 <h1>Using the Webpack Context for Images
 
@@ -136,3 +137,14 @@ General Notes on Coding for this project
         }
         </>
 
+<h1>Animated Bitmap Images
+
+    When using .png graphics or similar for animations, it is best to
+    preload these into memory, rather than risk timeout problems loading
+    image files. To do this, use the 
+        texture = PIXI.Texture.from('file-path') 
+    and then use the texture in place of image= in the Sprite:
+        <Sprite
+            texture={texture}
+            ..
+        </Sprite>

@@ -5,7 +5,7 @@
 			{
 				"type": "wasp",
 				"flying": {
-					"file": "wasp-flying.png",
+					"file": "wasp.png",
 					"width": 48,
 					"height": 24,
 					"aspect": "side",
