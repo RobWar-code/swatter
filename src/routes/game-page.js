@@ -12,6 +12,10 @@ export default function GamePage() {
     const alcoveWidth = useRef(0);
     const alcoveHeight = useRef(0);
     const stageCol = useRef(null);
+    const [lastBugScore, setLastBugScore] = useState(0);
+    const [gameScore, setGameScore] = useState(0);
+    const [bugCount, setBugCount] = useState(0);
+    const [lastGameScore, setLastGameScore] = useState(0);
 
     const determineStageSize = () => {
             // Get the stage column width
@@ -67,6 +71,14 @@ export default function GamePage() {
                         stageHeight={stageHeight}
                         stageScale={stageScale}
                         globalImageData={globalImageData}
+                        lastBugScore={lastBugScore}
+                        setLastBugScore={setLastBugScore}
+                        gameScore={gameScore}
+                        setGameScore={setGameScore}
+                        bugCount={bugCount}
+                        setBugCount={setBugCount}
+                        lastGameScore={lastGameScore}
+                        setLastGameScore={setLastGameScore}
                     />
                 </Col>
             </Row>
