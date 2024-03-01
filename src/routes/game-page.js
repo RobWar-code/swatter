@@ -2,6 +2,7 @@ import {useState, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import GameStage from '../components/GameStage';
+import GLOBALS from '../constants/constants';
 
 export default function GamePage() {
     const [,,graphicData] = useOutletContext();
@@ -14,7 +15,13 @@ export default function GamePage() {
     const stageCol = useRef(null);
     const [lastBugScore, setLastBugScore] = useState(0);
     const [gameScore, setGameScore] = useState(0);
-    const [bugCount, setBugCount] = useState(0);
+    const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
+    const [swatterSwiped, setSwatterSwiped] = useState(false);
+    const [bugHit, setBugHit] = useState(0);
+    const [getOrnamentBroken, setGetOrnamentBroken] = useState(false);
+    const [ornamentBroken, setOrnamentBroken] = useState(false);
+    const [swatterStrikeX, setSwatterStrikeX] = useState(0);
+    const [swatterStrikeY, setSwatterStrikeY] = useState(0)
     const [lastGameScore, setLastGameScore] = useState(0);
 
     const determineStageSize = () => {
@@ -62,6 +69,28 @@ export default function GamePage() {
 
     }, [])
 
+    // Do the scoring for a bug hit
+    useEffect(() => {
+        setGameScore(prevScore => prevScore + 10);
+        setBugCount(prevCount => prevCount - 1);
+    }, [bugHit])
+
+    useEffect(() => {
+        if (swatterSwiped) {
+            setGetOrnamentBroken(true);
+        }
+    }, [swatterSwiped])
+
+    // Adjust score for broken ornament
+    useEffect(() => {
+        if (ornamentBroken) {
+            setGameScore(prevScore => prevScore - 15);
+            setOrnamentBroken(false);
+        }
+    }, [ornamentBroken])
+
+
+
     return (
         <Container>
             <Row>
@@ -71,14 +100,15 @@ export default function GamePage() {
                         stageHeight={stageHeight}
                         stageScale={stageScale}
                         globalImageData={globalImageData}
-                        lastBugScore={lastBugScore}
-                        setLastBugScore={setLastBugScore}
-                        gameScore={gameScore}
-                        setGameScore={setGameScore}
-                        bugCount={bugCount}
-                        setBugCount={setBugCount}
-                        lastGameScore={lastGameScore}
-                        setLastGameScore={setLastGameScore}
+                        setSwatterSwiped={setSwatterSwiped}
+                        setBugHit={setBugHit}
+                        swatterStrikeX={swatterStrikeX}
+                        setSwatterStrikeX={setSwatterStrikeX}
+                        swatterStrikeY={swatterStrikeY}
+                        setSwatterStrikeY={setSwatterStrikeY}
+                        getOrnamentBroken={getOrnamentBroken}
+                        setGetOrnamentBroken={setGetOrnamentBroken}
+                        setOrnamentBroken={setOrnamentBroken}
                     />
                 </Col>
             </Row>

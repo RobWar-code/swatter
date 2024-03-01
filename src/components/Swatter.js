@@ -7,21 +7,17 @@ export default function Swatter({
     stageHeight, 
     stageScale, 
     globalImageData,
-    lastBugScore,
-    setLastBugScore,
-    gameScore,
-    setGameScore,
-    bugCount,
-    setBugCount,
-    lastGameScore,
-    setLastGameScore
+    setBugHit,
+    bugX,
+    bugY,
+    setSwatterStrikeX,
+    setSwatterStrikeY,
+    setSwatterSwiped
 }) {
     const [initial, setInitial] = useState(true);
     const swatterData = useRef();
     const [swatterDataState, setSwatterDataState] = useState({});
-    const [swatterMoved, setSwatterMoved] = useState(false);
     const [swatterActivated, setSwatterActivated] = useState(false);
-    const [swatterSwiped, setSwatterSwiped] = useState(false);
     const [swatterMoveLocationX, setSwatterMoveLocationX] = useState(0);
     const [swatterMoveLocationY, setSwatterMoveLocationY] = useState(0);
 
@@ -88,7 +84,9 @@ export default function Swatter({
     const handleSwatterStart = () => {
         if (!swatterActivated) {
             setSwatterActivated(true);
-            console.log("Got swatter activated");
+            swatterData.current.status = "standard";
+            swatterData.current.image = swatterData.current.standard.image;
+            setSwatterDataState(swatterData.current);
         }
     }
 
@@ -97,7 +95,6 @@ export default function Swatter({
             let x = event.data.global.x;
             let y = event.data.global.y;
             if (!(x === swatterMoveLocationX && y === swatterMoveLocationY)) {
-                console.log("swatter moved");
                 setSwatterMoveLocationX(x);
                 setSwatterMoveLocationY(y);
                 swatterData.current.x = x;
@@ -109,8 +106,19 @@ export default function Swatter({
 
     const handleSwatterDeactivated = () => {
         if (swatterActivated) {
-            console.log('Got pointer up')
             setSwatterActivated(false);
+            // Set the swatter to tilted and test for bug strike
+            swatterData.current.image = swatterData.current.tilted.image;
+            swatterData.current.status = "tilted";
+            setSwatterSwiped(true);
+            setSwatterStrikeX(swatterData.current.x);
+            setSwatterStrikeY(swatterData.current.y);
+            setSwatterDataState(swatterData.current);
+            // Check for swat
+            if (bugX > swatterData.current.x - 8 && bugX < swatterData.current.x + 8 &&
+                bugY > swatterData.current.y - 8 && bugY < swatterData.current.y + 8) {
+                setBugHit(true);
+            }
         }
     }
     

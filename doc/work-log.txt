@@ -8,13 +8,15 @@ Work Log
 
     * For bugs, use Texture as this avoids intermittent loading problems in animation 
 
-    Code the bug Flight paths
+    * Code the bug Flight paths
 
-    Incorporate the swatter graphic
+    * Incorporate the swatter graphic
 
-        Allow for swatter motion
+        * Allow for swatter motion
 
         Allow for swatter action
+
+            Complete swatter strike on ornament
 
     Include game start and next game modals
 

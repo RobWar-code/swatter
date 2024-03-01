@@ -3,7 +3,12 @@ import {Sprite} from '@pixi/react';
 
 export default function Ornaments({
     stageScale,
-    globalImageData
+    globalImageData,
+    getOrnamentBroken,
+    setGetOrnamentBroken,
+    setOrnamentBroken,
+    swatterStrikeX,
+    swatterStrikeY
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
@@ -12,17 +17,20 @@ export default function Ornaments({
 
     // Get the ornament data
     useEffect(() => {
-        for (let item of globalImageData) {
-            if (item.type === "ornaments") {
-                ornamentData.current = item.files;
-                break;
+        if (initial && globalImageData.length) {
+            for (let item of globalImageData) {
+                if (item.type === "ornaments") {
+                    ornamentData.current = item.files;
+                    break;
+                }
             }
+            setInitial(false);
         }
-    }, [globalImageData])
+    }, [globalImageData, initial])
 
     // Set the additional data in the ornament data
     useEffect(() => {
-        if (initial && ornamentData.current) {
+        if (ornamentData.current) {
             for (let i = 0; i < ornamentData.current.length; i++) {
                 let ornament = ornamentData.current[i];
                 ornament.isBroken = false;
@@ -44,9 +52,40 @@ export default function Ornaments({
                 ornamentBroken.actualHeight = ornamentBroken.height * stageScale;
             }
             setOrnamentDataState(ornamentData.current);
-            setInitial(false); 
         }
-    }, [initial, stageScale])
+    }, [stageScale])
+
+    // Check whether an ornament has been broken
+    useEffect(() => {
+ 
+        if (getOrnamentBroken) {
+            console.log("Get Ornament Broken Test", swatterStrikeX, swatterStrikeY, ornamentData.current);
+            let found = false;
+            let count = 0;
+            let ornament;
+            for (ornament of ornamentData.current) {
+                console.log("actualX, actualY", ornament, ornament.whole.x, ornament.whole.y);
+                if (swatterStrikeX > ornament.whole.actualX && 
+                    swatterStrikeX < ornament.whole.actualX + ornament.whole.actualWidth &&
+                    swatterStrikeY > ornament.whole.actualY &&
+                    swatterStrikeY < ornament.whole.actualY + ornament.whole.actualHeight) {
+                        found = true;
+                        break;
+                }
+                ++count;
+            }
+            if (found) {
+                if (!ornament.isBroken) {
+                    console.log("Broken Ornament");
+                    setOrnamentBroken(true);
+                    ornament.isBroken = true;
+                    setOrnamentDataState(ornamentData.current);
+                }
+            }
+            setGetOrnamentBroken(false);
+        }
+
+    }, [getOrnamentBroken, setGetOrnamentBroken, setOrnamentBroken, swatterStrikeX, swatterStrikeY])
 
     return (
         <>

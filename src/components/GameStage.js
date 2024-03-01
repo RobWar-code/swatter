@@ -10,16 +10,19 @@ export default function GameStage({
     stageHeight, 
     stageScale, 
     globalImageData,
-    lastBugScore,
-    setLastBugScore,
-    gameScore,
-    setGameScore,
-    bugCount,
-    setBugCount,
-    lastGameScore,
-    setLastGameScore
+    setSwatterSwiped,
+    setBugHit,
+    swatterStrikeX,
+    setSwatterStrikeX,
+    swatterStrikeY,
+    setSwatterStrikeY,
+    getOrnamentBroken,
+    setGetOrnamentBroken,
+    setOrnamentBroken
 }) {
     const [bugStart, setBugStart] = useState(false);
+    const [bugX, setBugX] = useState(0);
+    const [bugY, setBugY] = useState(0);
 
     return (
         <Stage width={stageWidth} height={stageHeight}>
@@ -33,6 +36,11 @@ export default function GameStage({
             <Ornaments 
                 stageScale={stageScale}
                 globalImageData={globalImageData}
+                getOrnamentBroken={getOrnamentBroken}
+                setGetOrnamentBroken={setGetOrnamentBroken}
+                setOrnamentBroken={setOrnamentBroken}
+                swatterStrikeX={swatterStrikeX}
+                swatterStrikeY={swatterStrikeY}
             />
             <Bug 
                 stageWidth={stageWidth}
@@ -41,20 +49,20 @@ export default function GameStage({
                 bugStart={bugStart}
                 setBugStart={setBugStart}
                 globalImageData={globalImageData}
+                setBugX={setBugX}
+                setBugY={setBugY}
             />
             <Swatter
                 stageWidth={stageWidth}
                 stageHeight={stageHeight}
                 stageScale={stageScale}
                 globalImageData={globalImageData}
-                lastBugScore={lastBugScore}
-                setLastBugScore={setLastBugScore}
-                gameScore={gameScore}
-                setGameScore={setGameScore}
-                bugCount={bugCount}
-                setBugCount={setBugCount}
-                lastGameScore={lastGameScore}
-                setLastGameScore={setLastGameScore}
+                setSwatterSwiped={setSwatterSwiped}
+                setBugHit={setBugHit}
+                bugX={bugX}
+                bugY={bugY}
+                setSwatterStrikeX={setSwatterStrikeX}
+                setSwatterStrikeY={setSwatterStrikeY}
             />
         </Stage>
     )

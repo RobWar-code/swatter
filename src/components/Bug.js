@@ -10,7 +10,9 @@ export default function Bug({
     stageScale,
     bugStart,
     setBugStart,
-    globalImageData
+    globalImageData,
+    setBugX,
+    setBugY
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -209,8 +211,8 @@ export default function Bug({
             }
 
             // Adjust position
-            activeBugData.current.x = activeBugData.current.x + activeBugData.current.vx;
-            activeBugData.current.y = activeBugData.current.y + activeBugData.current.vy;
+            activeBugData.current.x += activeBugData.current.vx;
+            activeBugData.current.y += activeBugData.current.vy;
             if (activeBugData.current.x < 0) {
                 activeBugData.current.vx = Math.abs(activeBugData.current.vx);
                 activeBugData.current.ax = Math.abs(activeBugData.current.ax);
@@ -223,7 +225,7 @@ export default function Bug({
                 activeBugData.current.vy = Math.abs(activeBugData.current.vy);
                 activeBugData.current.ay = Math.abs(activeBugData.current.ay);
             }
-            else if (activeBugData.current.y > stageWidth) {
+            else if (activeBugData.current.y >= stageWidth) {
                 activeBugData.current.vy = -Math.abs(activeBugData.current.vy);
                 activeBugData.current.ay = -Math.abs(activeBugData.current.ay);
             }
@@ -280,6 +282,8 @@ export default function Bug({
 
                     // Update the state
                     setActiveBugDataState(activeBugData.current);
+                    setBugX(activeBugData.current.x);
+                    setBugY(activeBugData.current.y);
                 }
                 let c = counter + 1; 
                 setCounter(c);
@@ -305,7 +309,7 @@ export default function Bug({
         };
 
     
-    }, [bugActive, counter, stageWidth, stageHeight, app])
+    }, [bugActive, counter, stageWidth, stageHeight, setBugX, setBugY, app])
 
     return (
         <>

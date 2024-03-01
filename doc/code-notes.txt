@@ -6,6 +6,7 @@ General Notes on Coding for this project
         Connecting to PIXI.js code
         Sprite Array Fragment
         Animated Bitmap Images
+        Inherited States
 
 <h1>Using the Webpack Context for Images
 
@@ -148,3 +149,10 @@ General Notes on Coding for this project
             texture={texture}
             ..
         </Sprite>
+
+<h1>Inherited States
+
+    It should be noted that when using inherited states to be set by a child 
+    component and the child has dominant use, then the child should use its 
+    own state and then reflect it in the parent state, for communication.
+    State Primacy.
