@@ -55,8 +55,6 @@ export default function Swatter({
             else {
                 // Get the swatter textures etc.
                 for (let item of swatterItem) {
-                    console.log(swatterItem);
-                    console.log(item);
                     if (item.type === "standard") {
                         swatterData.current.standard = {};
                         swatterData.current.standard.image = imageLoader(item.file);

@@ -12,7 +12,10 @@ export default function Bug({
     setBugStart,
     globalImageData,
     setBugX,
-    setBugY
+    setBugY,
+    setRequestBugSitting,
+    sittingDue,
+    setSittingDue
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -23,6 +26,7 @@ export default function Bug({
     const [bugActive, setBugActive] = useState(false);
     const numBugs = useRef();
     const landingSites = useRef();
+    const landingSiteRef = useRef();
     const app = useApp();
 
     const imageNameFromFile = (filename) => {
@@ -142,7 +146,6 @@ export default function Bug({
             activeBugData.current.numBugSteps = Math.floor(Math.random() * 0.5) * GLOBALS.maxBugSteps + 0.5 * GLOBALS.maxBugSteps;
             setBugStart(false);
             setActiveBugDataState(activeBugData.current);
-            console.log("activeBugDataState:", activeBugData);
             setBugActive(true);
         }
 
@@ -253,13 +256,10 @@ export default function Bug({
             }
 
             if (nearSite && Math.random() > 0.995) {
-                // Do the landing
-                activeBugData.current.status = "sitting";
-                activeBugData.current.sitStart = counter;
-                activeBugData.current.image = bugData.current[bugNum.current].sitting.image;
-                // Set the position
-                activeBugData.current.x = site.x + site.width / 2;
-                activeBugData.current.y = site.y + site.height / 2;
+                // If on an ornament, check whether it is broken
+                let ornamentSite = site.onOrnament;
+                setRequestBugSitting(ornamentSite);
+                landingSiteRef.current = site;
             }
         }
 
@@ -309,7 +309,22 @@ export default function Bug({
         };
 
     
-    }, [bugActive, counter, stageWidth, stageHeight, setBugX, setBugY, app])
+    }, [bugActive, counter, stageWidth, stageHeight, setBugX, setBugY, setRequestBugSitting, app])
+
+    // Implement bug sitting if it applies
+    useEffect(() => {
+        if (sittingDue && bugActive && landingSiteRef.current) {
+            // Do the landing
+            activeBugData.current.status = "sitting";
+            activeBugData.current.sitStart = counter;
+            activeBugData.current.image = bugData.current[bugNum.current].sitting.image;
+            // Set the position
+            activeBugData.current.x = landingSiteRef.current.x + landingSiteRef.current.width / 2;
+            activeBugData.current.y = landingSiteRef.current.y + landingSiteRef.current.height / 2;
+            setActiveBugDataState(activeBugData.current);
+        }
+        setSittingDue(false);
+    }, [sittingDue, setSittingDue, counter, bugActive])
 
     return (
         <>

@@ -27,7 +27,6 @@ export default function DataLoader({
         
                 const data = await response.json();
                 setGraphicData(data);
-                console.log(data);
                 setGraphicDataFetched(true);
             }
             catch (e) {

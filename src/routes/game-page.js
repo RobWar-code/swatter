@@ -71,20 +71,21 @@ export default function GamePage() {
 
     // Do the scoring for a bug hit
     useEffect(() => {
-        setGameScore(prevScore => prevScore + 10);
+        setGameScore(prevScore => prevScore + GLOBALS.bugHitScore);
         setBugCount(prevCount => prevCount - 1);
     }, [bugHit])
 
     useEffect(() => {
         if (swatterSwiped) {
             setGetOrnamentBroken(true);
+            setSwatterSwiped(false);
         }
     }, [swatterSwiped])
 
     // Adjust score for broken ornament
     useEffect(() => {
         if (ornamentBroken) {
-            setGameScore(prevScore => prevScore - 15);
+            setGameScore(prevScore => prevScore + GLOBALS.ornamentBreakScore);
             setOrnamentBroken(false);
         }
     }, [ornamentBroken])

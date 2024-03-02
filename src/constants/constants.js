@@ -7,7 +7,9 @@ const GLOBALS = {
     maxBugSteps: 10000,
     motionChangeSteps: 50,
     sitTime: 100,
-    bugsPerGame: 6
+    bugsPerGame: 6,
+    bugHitScore: 10,
+    ornamentBreakScore: -15
 }
 
 export default GLOBALS;

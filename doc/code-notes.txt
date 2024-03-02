@@ -6,7 +6,7 @@ General Notes on Coding for this project
         Connecting to PIXI.js code
         Sprite Array Fragment
         Animated Bitmap Images
-        Inherited States
+        React State Management
 
 <h1>Using the Webpack Context for Images
 
@@ -150,9 +150,22 @@ General Notes on Coding for this project
             ..
         </Sprite>
 
-<h1>Inherited States
+<h1>React State Management
 
     It should be noted that when using inherited states to be set by a child 
     component and the child has dominant use, then the child should use its 
     own state and then reflect it in the parent state, for communication.
     State Primacy.
+
+    When working with complex state arrays and objects, it is better to use
+    a local useRef() variable to update the state and then transfer it wholesale
+    to the state to be used for communication or JSX elements, this makes coding 
+    more simple. For example use:
+        myDataComponentRef = useRef() and [myDataComponentState, setMyDataComponent] = useState([])
+
+    In order to keep data states local to their respective components, use
+    request states to gain access to data within component modules. ie:
+        [requestMyComponentData, setRequestMyComponentData] = useState(false)
+
+    Then use another state to collect the result
+        [myComponentData, setMyComponentData] = useState({})

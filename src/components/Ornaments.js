@@ -8,7 +8,11 @@ export default function Ornaments({
     setGetOrnamentBroken,
     setOrnamentBroken,
     swatterStrikeX,
-    swatterStrikeY
+    swatterStrikeY,
+    requestBugSitting,
+    setRequestBugSitting,
+    sittingDue,
+    setSittingDue
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
@@ -59,12 +63,9 @@ export default function Ornaments({
     useEffect(() => {
  
         if (getOrnamentBroken) {
-            console.log("Get Ornament Broken Test", swatterStrikeX, swatterStrikeY, ornamentData.current);
             let found = false;
-            let count = 0;
             let ornament;
             for (ornament of ornamentData.current) {
-                console.log("actualX, actualY", ornament, ornament.whole.x, ornament.whole.y);
                 if (swatterStrikeX > ornament.whole.actualX && 
                     swatterStrikeX < ornament.whole.actualX + ornament.whole.actualWidth &&
                     swatterStrikeY > ornament.whole.actualY &&
@@ -72,11 +73,9 @@ export default function Ornaments({
                         found = true;
                         break;
                 }
-                ++count;
             }
             if (found) {
                 if (!ornament.isBroken) {
-                    console.log("Broken Ornament");
                     setOrnamentBroken(true);
                     ornament.isBroken = true;
                     setOrnamentDataState(ornamentData.current);
@@ -86,6 +85,28 @@ export default function Ornaments({
         }
 
     }, [getOrnamentBroken, setGetOrnamentBroken, setOrnamentBroken, swatterStrikeX, swatterStrikeY])
+
+    // Check whether the ornament on which a fly may settle is broken
+    useEffect (() => {
+        // Check the ornament data
+        let onBrokenOrnament = false;
+        if (requestBugSitting !== "no") {
+            // Get ornament number from the request
+            let s = requestBugSitting;
+            let p = parseInt(s.substring(4,6)) - 1;
+            if (ornamentData.current[p].isBroken) {
+                onBrokenOrnament = true;
+            }
+        
+            if (onBrokenOrnament) {
+                setSittingDue(false);
+            }
+            else {
+                setSittingDue(true);
+            }
+        }
+        setRequestBugSitting("no");
+    }, [requestBugSitting, setRequestBugSitting, setSittingDue])
 
     return (
         <>

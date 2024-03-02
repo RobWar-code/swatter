@@ -10,23 +10,31 @@ Work Log
 
     * Code the bug Flight paths
 
+        Check whether the ornament landing site is broken
+
     * Incorporate the swatter graphic
 
         * Allow for swatter motion
 
         Allow for swatter action
 
-            Complete swatter strike on ornament
+            * Complete swatter strike on ornament
 
-    Include game start and next game modals
+            Complete bug hit
 
     Allow for scoring
 
+    Do Game Page Scoring
+
     Allow for score chart display
+
+    Include game start and next game modals
 
     Incorporate sounds
 
     Add sound enable control
+
+    Notes on state management
 
 <h2>Work Done
 
