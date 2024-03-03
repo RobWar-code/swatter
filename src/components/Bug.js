@@ -113,6 +113,7 @@ export default function Bug({
 
     // Set-up a new bug for activity
     useEffect(() => {
+        console.log("bugStart:", bugStart);
         if (bugStart) {
             // Choose a bug
             bugNum.current = Math.floor(Math.random() * numBugs.current);
@@ -152,7 +153,7 @@ export default function Bug({
             setCounter(0);
         }
 
-    }, [bugStart, counter, stageWidth, stageHeight, setBugStart])
+    }, [bugStart, stageWidth, stageHeight, setBugStart])
 
     // Handle the active state of the current bug
     useEffect(() => {
@@ -340,7 +341,7 @@ export default function Bug({
             }, 3000);
             setBugHitScored(false);
         }
-    }, [bugHitScored, setBugStart])
+    }, [bugHitScored, setBugHitScored, setBugStart])
 
     return (
         <>
