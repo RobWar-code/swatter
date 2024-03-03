@@ -114,7 +114,7 @@ export default function Swatter({
             setSwatterDataState(swatterData.current);
             // Check for swat
             if (bugX > swatterData.current.x - 8 && bugX < swatterData.current.x + 8 &&
-                bugY > swatterData.current.y - 8 && bugY < swatterData.current.y + 8) {
+                bugY > swatterData.current.y - 8 && bugY < swatterData.current.y + 25) {
                 setBugHit(true);
             }
         }

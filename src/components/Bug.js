@@ -15,7 +15,9 @@ export default function Bug({
     setBugY,
     setRequestBugSitting,
     sittingDue,
-    setSittingDue
+    setSittingDue,
+    bugHitScored,
+    setBugHitScored
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -147,9 +149,10 @@ export default function Bug({
             setBugStart(false);
             setActiveBugDataState(activeBugData.current);
             setBugActive(true);
+            setCounter(0);
         }
 
-    }, [bugStart, stageWidth, stageHeight, setBugStart])
+    }, [bugStart, counter, stageWidth, stageHeight, setBugStart])
 
     // Handle the active state of the current bug
     useEffect(() => {
@@ -294,6 +297,7 @@ export default function Bug({
             }
         };
 
+        if (!bugActive) console.log("bug Inactive");
         if (bugActive) {
             app.ticker.add(moveBug);
         }
@@ -325,6 +329,18 @@ export default function Bug({
         }
         setSittingDue(false);
     }, [sittingDue, setSittingDue, counter, bugActive])
+
+    // Allow for bug hit
+    useEffect(() => {
+        console.log("bugHitScored", bugHitScored)
+        if (bugHitScored) {
+            setBugActive(false);
+            setTimeout(() => {
+                setBugStart(true);
+            }, 3000);
+            setBugHitScored(false);
+        }
+    }, [bugHitScored, setBugStart])
 
     return (
         <>

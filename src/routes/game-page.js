@@ -18,6 +18,7 @@ export default function GamePage() {
     const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
     const [swatterSwiped, setSwatterSwiped] = useState(false);
     const [bugHit, setBugHit] = useState(0);
+    const [bugHitScored, setBugHitScored] = useState(false);
     const [getOrnamentBroken, setGetOrnamentBroken] = useState(false);
     const [ornamentBroken, setOrnamentBroken] = useState(false);
     const [swatterStrikeX, setSwatterStrikeX] = useState(0);
@@ -71,8 +72,13 @@ export default function GamePage() {
 
     // Do the scoring for a bug hit
     useEffect(() => {
-        setGameScore(prevScore => prevScore + GLOBALS.bugHitScore);
-        setBugCount(prevCount => prevCount - 1);
+        if (bugHit) {
+            setGameScore(prevScore => prevScore + GLOBALS.bugHitScore);
+            setBugCount(prevCount => prevCount - 1);
+            setBugHitScored(true);
+            setBugHit(false);
+            console.log("Bug Hit");
+        }
     }, [bugHit])
 
     useEffect(() => {
@@ -102,7 +108,10 @@ export default function GamePage() {
                         stageScale={stageScale}
                         globalImageData={globalImageData}
                         setSwatterSwiped={setSwatterSwiped}
+                        bugHit={bugHit}
                         setBugHit={setBugHit}
+                        bugHitScored={bugHitScored}
+                        setBugHitScored={setBugHitScored}
                         swatterStrikeX={swatterStrikeX}
                         setSwatterStrikeX={setSwatterStrikeX}
                         swatterStrikeY={swatterStrikeY}

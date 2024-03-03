@@ -12,6 +12,8 @@ export default function GameStage({
     globalImageData,
     setSwatterSwiped,
     setBugHit,
+    bugHitScored,
+    setBugHitScored,
     swatterStrikeX,
     setSwatterStrikeX,
     swatterStrikeY,
@@ -59,6 +61,8 @@ export default function GameStage({
                 setRequestBugSitting={setRequestBugSitting}
                 sittingDue={sittingDue}
                 setSittingDue={setSittingDue}
+                bugHitScored={bugHitScored}
+                setBugHitScored={setBugHitScored}
             />
             <Swatter
                 stageWidth={stageWidth}
