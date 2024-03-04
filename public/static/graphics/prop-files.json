@@ -494,5 +494,15 @@
 				"onOrnament" : "no"
 			}
 		]
+	},
+	{
+		"type" : "score chart",
+		"file" : "score-chart.png",
+		"width" : 1024,
+		"height" : 1024,
+		"textLeft" : 348,
+		"textTop" : 272,
+		"textRight" : 702,
+		"textBottom" : 746
 	}
 ]

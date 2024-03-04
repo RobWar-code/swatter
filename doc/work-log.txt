@@ -22,7 +22,15 @@ Work Log
 
             Complete bug hit
 
+            Allow for game over
+
     Allow for scoring
+
+        Do the graphic score chart
+
+        Do the score updates
+
+        Allow for the score chart font
 
     Do Game Page Scoring
 

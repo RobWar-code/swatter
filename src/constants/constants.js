@@ -1,8 +1,8 @@
 const GLOBALS = {
     graphicDataFile: "prop-files.json",
     graphicDataPath: "/static/graphics/",
-    maxSpeed: 1.5,
-    maxAcceleration: 0.2,
+    maxSpeed: 1.8,
+    maxAcceleration: 0.25,
     maxAccelerationChange: 0.05,
     maxBugSteps: 10000,
     motionChangeSteps: 50,

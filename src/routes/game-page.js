@@ -2,6 +2,7 @@ import {useState, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import GameStage from '../components/GameStage';
+import ScoreChart from '../components/ScoreChart'
 import GLOBALS from '../constants/constants';
 
 export default function GamePage() {
@@ -9,13 +10,19 @@ export default function GamePage() {
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
     const [stageScale, setStageScale] = useState(1);
+    const [scoreChartWidth, setScoreChartWidth] = useState(1024);
+    const [scoreChartHeight, setScoreChartHeight] = useState(1024);
+    const [scoreChartScaleX, setScoreChartScaleX] = useState(390/1024);
+    const [scoreChartScaleY, setScoreChartScaleY] = useState(375/1024);
     const [globalImageData, setGlobalImageData] = useState([]);
     const alcoveWidth = useRef(0);
     const alcoveHeight = useRef(0);
     const stageCol = useRef(null);
     const [lastBugScore, setLastBugScore] = useState(0);
+    const [lastGameScore, setLastGameScore] = useState(0);
     const [gameScore, setGameScore] = useState(0);
     const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
+    const [highGameScore, setHighGameScore] = useState(0);
     const [swatterSwiped, setSwatterSwiped] = useState(false);
     const [bugHit, setBugHit] = useState(0);
     const [bugHitScored, setBugHitScored] = useState(false);
@@ -23,8 +30,8 @@ export default function GamePage() {
     const [ornamentBroken, setOrnamentBroken] = useState(false);
     const [swatterStrikeX, setSwatterStrikeX] = useState(0);
     const [swatterStrikeY, setSwatterStrikeY] = useState(0)
-    const [lastGameScore, setLastGameScore] = useState(0);
 
+    // Determine the stage and score chart sizes
     const determineStageSize = () => {
             // Get the stage column width
             const stageColWidth = stageCol.current.offsetWidth;
@@ -39,6 +46,11 @@ export default function GamePage() {
             setStageWidth(sWidth);
             setStageHeight(sHeight);
             setStageScale(scale);
+            // Set the score chart sizes
+            setScoreChartWidth(sWidth);
+            setScoreChartHeight(sHeight);
+            setScoreChartScaleX(sWidth/1024);
+            setScoreChartScaleY(sHeight/1024);
     };
 
     // Get the alcove width and height
@@ -119,6 +131,20 @@ export default function GamePage() {
                         getOrnamentBroken={getOrnamentBroken}
                         setGetOrnamentBroken={setGetOrnamentBroken}
                         setOrnamentBroken={setOrnamentBroken}
+                    />
+                </Col>
+                <Col className="text-center" md={6}>
+                    <ScoreChart
+                        globalImageData={globalImageData}
+                        scoreChartWidth={scoreChartWidth}
+                        scoreChartHeight={scoreChartHeight}
+                        scoreChartScaleX={scoreChartScaleX}
+                        scoreChartScaleY={scoreChartScaleY}
+                        lastBugScore={lastBugScore}
+                        lastGameScore={lastGameScore}
+                        gameScore={gameScore}
+                        bugCount={bugCount}
+                        highGameScore={highGameScore}
                     />
                 </Col>
             </Row>
