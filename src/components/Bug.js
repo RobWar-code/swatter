@@ -10,6 +10,8 @@ export default function Bug({
     stageScale,
     bugStart,
     setBugStart,
+    bugCount,
+    setBugCount,
     globalImageData,
     setBugX,
     setBugY,
@@ -250,19 +252,20 @@ export default function Bug({
 
         const checkForLanding = () => {
             let nearSite = false;
+            let onOrnament = "";
             let site;
             for (site of landingSites.current) {
                 if ((site.x - 5 < activeBugData.current.x && site.x + site.width + 5 > activeBugData.current.x) &&
                     (site.y - 5 < activeBugData.current.y && site.y + site.height + 5 > activeBugData.current.y)) {
                     nearSite = true;
+                    onOrnament = site.onOrnament;
                     break;
                 }
             }
 
             if (nearSite && Math.random() > 0.995) {
                 // If on an ornament, check whether it is broken
-                let ornamentSite = site.onOrnament;
-                setRequestBugSitting(ornamentSite);
+                setRequestBugSitting(onOrnament);
                 landingSiteRef.current = site;
             }
         }
@@ -293,6 +296,13 @@ export default function Bug({
                 setCounter(c);
                 if (c > activeBugData.current.numBugSteps) {
                     setBugActive(false);
+                    if (bugCount > 0) {
+                        console.log("Buzzed out");
+                        setBugCount(prev => prev - 1);
+                        setTimeout(() => {
+                            setBugStart(true);
+                        }, 2000);
+                    }
                     setCounter(0);
                 }
             }
@@ -314,7 +324,7 @@ export default function Bug({
         };
 
     
-    }, [bugActive, counter, stageWidth, stageHeight, setBugX, setBugY, setRequestBugSitting, app])
+    }, [bugActive, bugCount, setBugCount, setBugStart, counter, stageWidth, stageHeight, setBugX, setBugY, setRequestBugSitting, app])
 
     // Implement bug sitting if it applies
     useEffect(() => {

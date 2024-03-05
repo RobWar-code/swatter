@@ -12,6 +12,10 @@ Work Log
 
         Check whether the ornament landing site is broken
 
+        Fix landing on sites on other than ornaments
+
+        * Increase the max flight speed
+
     * Incorporate the swatter graphic
 
         * Allow for swatter motion
@@ -26,21 +30,25 @@ Work Log
 
     Allow for scoring
 
-        Do the graphic score chart
+        * Do the graphic score chart
 
-        Do the score updates
+        * Do the score updates
 
         Allow for the score chart font
 
-    Do Game Page Scoring
+        * Do Game Page Scoring
 
-    Allow for score chart display
+    Reconstruct ornaments at start of new game
+
+    Do score table page
 
     Include game start and next game modals
 
     Incorporate sounds
 
     Add sound enable control
+
+    Include game pause button on control panel
 
     Notes on state management
 

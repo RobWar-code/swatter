@@ -12,7 +12,9 @@ export default function Ornaments({
     requestBugSitting,
     setRequestBugSitting,
     sittingDue,
-    setSittingDue
+    setSittingDue,
+    resetOrnaments,
+    setResetOrnaments
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
@@ -105,8 +107,24 @@ export default function Ornaments({
                 setSittingDue(true);
             }
         }
+        else {
+            console.log("requestBugSitting:", requestBugSitting);
+            setSittingDue(true);
+        }
         setRequestBugSitting("no");
     }, [requestBugSitting, setRequestBugSitting, setSittingDue])
+
+    // Check for reset of broken ornaments (when a game is completed)
+    useEffect(() => {
+        if (resetOrnaments) {
+            for (let item in ornamentData.current) {
+                item.isBroken = false;
+            }
+            setOrnamentDataState(ornamentData.current);
+            setResetOrnaments(false);
+        }
+
+    }, [resetOrnaments, setResetOrnaments])
 
     return (
         <>

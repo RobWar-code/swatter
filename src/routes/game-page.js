@@ -7,6 +7,7 @@ import GLOBALS from '../constants/constants';
 
 export default function GamePage() {
     const [,,graphicData] = useOutletContext();
+    const [scoreTable, setScoreTable] = useOutletContext();
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
     const [stageScale, setStageScale] = useState(1);
@@ -18,11 +19,11 @@ export default function GamePage() {
     const alcoveWidth = useRef(0);
     const alcoveHeight = useRef(0);
     const stageCol = useRef(null);
-    const [lastBugScore, setLastBugScore] = useState(0);
+    const [gameNum, setGameNum] = useState(1);
     const [lastGameScore, setLastGameScore] = useState(0);
     const [gameScore, setGameScore] = useState(0);
     const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
-    const [highGameScore, setHighGameScore] = useState(0);
+    const [resetOrnaments, setResetOrnaments] = useState(false);
     const [swatterSwiped, setSwatterSwiped] = useState(false);
     const [bugHit, setBugHit] = useState(0);
     const [bugHitScored, setBugHitScored] = useState(false);
@@ -93,6 +94,18 @@ export default function GamePage() {
         }
     }, [bugHit])
 
+    // Do the end of game scoring
+    useEffect(() => {
+        if (bugCount <= 0) {
+            setLastGameScore(gameScore);
+            setScoreTable(prev => [...prev, {score: gameScore, gameNum: gameNum}]);
+            setGameNum(prev => prev + 1);
+            setBugCount(GLOBALS.bugsPerGame);
+            setResetOrnaments(true);
+            setGameScore(0);
+        }
+    }, [bugCount, gameScore, gameNum, setScoreTable])
+
     useEffect(() => {
         if (swatterSwiped) {
             setGetOrnamentBroken(true);
@@ -124,6 +137,8 @@ export default function GamePage() {
                         setBugHit={setBugHit}
                         bugHitScored={bugHitScored}
                         setBugHitScored={setBugHitScored}
+                        bugCount={bugCount}
+                        setBugCount={setBugCount}
                         swatterStrikeX={swatterStrikeX}
                         setSwatterStrikeX={setSwatterStrikeX}
                         swatterStrikeY={swatterStrikeY}
@@ -131,6 +146,8 @@ export default function GamePage() {
                         getOrnamentBroken={getOrnamentBroken}
                         setGetOrnamentBroken={setGetOrnamentBroken}
                         setOrnamentBroken={setOrnamentBroken}
+                        resetOrnaments={resetOrnaments}
+                        setResetOrnaments={setResetOrnaments}
                     />
                 </Col>
                 <Col className="text-center" md={6}>
@@ -140,11 +157,11 @@ export default function GamePage() {
                         scoreChartHeight={scoreChartHeight}
                         scoreChartScaleX={scoreChartScaleX}
                         scoreChartScaleY={scoreChartScaleY}
-                        lastBugScore={lastBugScore}
+                        gameNum={gameNum}
                         lastGameScore={lastGameScore}
                         gameScore={gameScore}
                         bugCount={bugCount}
-                        highGameScore={highGameScore}
+                        scoreTable={scoreTable}
                     />
                 </Col>
             </Row>

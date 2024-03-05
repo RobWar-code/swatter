@@ -14,13 +14,17 @@ export default function GameStage({
     setBugHit,
     bugHitScored,
     setBugHitScored,
+    bugCount,
+    setBugCount,
     swatterStrikeX,
     setSwatterStrikeX,
     swatterStrikeY,
     setSwatterStrikeY,
     getOrnamentBroken,
     setGetOrnamentBroken,
-    setOrnamentBroken
+    setOrnamentBroken,
+    resetOrnaments,
+    setResetOrnaments
 }) {
     const [bugStart, setBugStart] = useState(false);
     const [requestBugSitting, setRequestBugSitting] = useState("no");
@@ -48,6 +52,8 @@ export default function GameStage({
                 requestBugSitting={requestBugSitting}
                 setRequestBugSitting={setRequestBugSitting}
                 setSittingDue={setSittingDue}
+                resetOrnaments={resetOrnaments}
+                setResetOrnaments={setResetOrnaments}
             />
             <Bug 
                 stageWidth={stageWidth}
@@ -55,6 +61,8 @@ export default function GameStage({
                 stageScale={stageScale}
                 bugStart={bugStart}
                 setBugStart={setBugStart}
+                bugCount={bugCount}
+                setBugCount={setBugCount}
                 globalImageData={globalImageData}
                 setBugX={setBugX}
                 setBugY={setBugY}
