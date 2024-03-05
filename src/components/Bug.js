@@ -265,6 +265,7 @@ export default function Bug({
 
             if (nearSite && Math.random() > 0.995) {
                 // If on an ornament, check whether it is broken
+                console.log("On Ornament:", onOrnament)
                 setRequestBugSitting(onOrnament);
                 landingSiteRef.current = site;
             }
@@ -324,7 +325,18 @@ export default function Bug({
         };
 
     
-    }, [bugActive, bugCount, setBugCount, setBugStart, counter, stageWidth, stageHeight, setBugX, setBugY, setRequestBugSitting, app])
+    }, [
+        bugActive, 
+        bugCount, 
+        setBugCount, 
+        setBugStart, 
+        counter, 
+        stageWidth, 
+        stageHeight, 
+        setBugX, 
+        setBugY, 
+        setRequestBugSitting, 
+        app])
 
     // Implement bug sitting if it applies
     useEffect(() => {
@@ -337,9 +349,10 @@ export default function Bug({
             activeBugData.current.x = landingSiteRef.current.x + landingSiteRef.current.width / 2;
             activeBugData.current.y = landingSiteRef.current.y + landingSiteRef.current.height / 2;
             setActiveBugDataState(activeBugData.current);
+            setSittingDue(false);
+            setRequestBugSitting("");
         }
-        setSittingDue(false);
-    }, [sittingDue, setSittingDue, counter, bugActive])
+    }, [sittingDue, setSittingDue, setRequestBugSitting, counter, bugActive])
 
     // Allow for bug hit
     useEffect(() => {

@@ -27,7 +27,7 @@ export default function GameStage({
     setResetOrnaments
 }) {
     const [bugStart, setBugStart] = useState(false);
-    const [requestBugSitting, setRequestBugSitting] = useState("no");
+    const [requestBugSitting, setRequestBugSitting] = useState("");
     const [sittingDue, setSittingDue] = useState(false);
     const [bugX, setBugX] = useState(0);
     const [bugY, setBugY] = useState(0);
