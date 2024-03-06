@@ -22,7 +22,6 @@ export default function ScoreChart({
     const fontLayout = useRef();
     const [fontLayoutState, setFontLayoutState] = useState([]);
 
-
     useEffect(() => {
         // Collect the image data
         if (initial && globalImageData) {
@@ -38,7 +37,6 @@ export default function ScoreChart({
             if (found) {
                 let fileName = scoreChartData.current.file;
                 scoreChartData.current.image = `${process.env.PUBLIC_URL}/static/graphics/${fileName}`;
-                console.log(scoreChartData.current.image);
                 setScoreChartDataState(scoreChartData.current);
                 setInitial(false);
             }
@@ -64,14 +62,13 @@ export default function ScoreChart({
         fontLayout.current = getFontLayoutDetails();
 
         // Setup the font details
-        fontLayout.current.font = "Helvetica, sans-serif";
+        fontLayout.current.font = "Kaushan, Helvetica, sans-serif";
         fontLayout.current.fill = ['#ffffff', '#ffffff'];
         fontLayout.current.stroke = '#ffffff';
 
         // Setup the text
         scoreText.current = [];
         let lineY = 0;
-        console.log(fontLayout.current.textCenter);
         let text1 = {
             text: "Score Chart",
             x: fontLayout.current.textCenter - 6 * (fontLayout.current.fontSize * 1/2.7),

@@ -31,6 +31,8 @@ export default function GameStage({
     const [sittingDue, setSittingDue] = useState(false);
     const [bugX, setBugX] = useState(0);
     const [bugY, setBugY] = useState(0);
+    const [swatterX, setSwatterX] = useState(0);
+    const [swatterY, setSwatterY] = useState(0);
 
     return (
         <Stage width={stageWidth} height={stageHeight}>
@@ -71,6 +73,8 @@ export default function GameStage({
                 setSittingDue={setSittingDue}
                 bugHitScored={bugHitScored}
                 setBugHitScored={setBugHitScored}
+                swatterX={swatterX}
+                swatterY={swatterY}
             />
             <Swatter
                 stageWidth={stageWidth}
@@ -83,6 +87,8 @@ export default function GameStage({
                 bugY={bugY}
                 setSwatterStrikeX={setSwatterStrikeX}
                 setSwatterStrikeY={setSwatterStrikeY}
+                setSwatterX={setSwatterX}
+                setSwatterY={setSwatterY}
             />
         </Stage>
     )

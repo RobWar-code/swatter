@@ -10,35 +10,39 @@ Work Log
 
     * Code the bug Flight paths
 
-        Check whether the ornament landing site is broken
+        * Check whether the ornament landing site is broken
 
-        Fix landing on sites on other than ornaments
+        * Fix landing on sites on other than ornaments
 
         * Increase the max flight speed
+
+        Swatter Avoidance Path Adjustments
 
     * Incorporate the swatter graphic
 
         * Allow for swatter motion
 
-        Allow for swatter action
+        * Allow for swatter action
 
             * Complete swatter strike on ornament
 
-            Complete bug hit
+            * Complete bug hit
 
-            Allow for game over
-
-    Allow for scoring
+    * Allow for game over
+    
+    * Allow for scoring
 
         * Do the graphic score chart
 
         * Do the score updates
 
-        Allow for the score chart font
+        * Allow for the score chart font
+
+        * Put web font loader on the root page
 
         * Do Game Page Scoring
 
-    Reconstruct ornaments at start of new game
+    * Reconstruct ornaments at start of new game
 
     Do score table page
 
@@ -50,6 +54,10 @@ Work Log
 
     Include game pause button on control panel
 
+    Include difficulty level slider
+
+    Update the README
+    
     Notes on state management
 
 <h2>Work Done

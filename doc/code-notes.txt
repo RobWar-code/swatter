@@ -7,6 +7,7 @@ General Notes on Coding for this project
         Sprite Array Fragment
         Animated Bitmap Images
         React State Management
+        Local Fonts for PIXI
 
 <h1>Using the Webpack Context for Images
 
@@ -169,3 +170,37 @@ General Notes on Coding for this project
 
     Then use another state to collect the result
         [myComponentData, setMyComponentData] = useState({})
+
+<h1>Local Fonts for PIXI
+
+    It is possible to use local decorative fonts for PIXI (ie those that are available 
+    from fontsquirrel).
+
+    In order to implement these, include the font-face reference in css, ie:
+
+        @font-face {
+            font-family: "myFont";
+            src: url('/public/static/fonts/myFont.otf') format("opentype");
+        }
+
+    Install webfontloader
+
+        npm install webfontloader
+
+    Load the font in the root jsx page
+
+        import WebFont from 'webfontloader'
+
+        useEffect(() => {
+            WebFont.load({
+                custom: {
+                    families: ['myFont'],
+                    urls: ['../styles/index.css']
+                },
+                active: () => {
+                    console.log("Font Loaded")
+                }  
+            })
+        }, [])
+
+    Then use the font-family: "myFont" in the Text sprite.

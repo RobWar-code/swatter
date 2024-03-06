@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Kaushan";
+    src: url("/public/static/fonts/KaushanScript-Regular.otf") format("opentype");
+}
+
 .navItem:hover {
     background-color: beige;
 }

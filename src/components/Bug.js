@@ -19,7 +19,9 @@ export default function Bug({
     sittingDue,
     setSittingDue,
     bugHitScored,
-    setBugHitScored
+    setBugHitScored,
+    swatterX,
+    swatterY
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -115,7 +117,6 @@ export default function Bug({
 
     // Set-up a new bug for activity
     useEffect(() => {
-        console.log("bugStart:", bugStart);
         if (bugStart) {
             // Choose a bug
             bugNum.current = Math.floor(Math.random() * numBugs.current);
@@ -160,7 +161,25 @@ export default function Bug({
     // Handle the active state of the current bug
     useEffect(() => {
         const doChangesToMotion = () => {
-            if (counter - activeBugData.current.lastMotionChangeStep > GLOBALS.motionChangeSteps && Math.random() > 0.1) {
+            // Check the position of the bug relative to the swatter
+            let dx = swatterX - activeBugData.current.x;
+            let dy = swatterY - activeBugData.current.y;
+            let d = Math.sqrt(dx ** 2 + dy ** 2);
+            if (d < GLOBALS.bugReactionDistance) {
+                if (dx < 0 && activeBugData.current.ax < 0) {
+                    activeBugData.current.ax = GLOBALS.maxAcceleration;
+                }
+                else if (dx > 0 && activeBugData.current.ax > 0) {
+                    activeBugData.current.ax = -GLOBALS.maxAcceleration;
+                }
+                if (dy < 0 && activeBugData.current.ay < 0) {
+                    activeBugData.current.ay = GLOBALS.maxAcceleration;
+                } 
+                else if (dy > 0 && activeBugData.current.ay > 0) {
+                    activeBugData.current.ay = -GLOBALS.maxAcceleration;
+                }
+            }
+            else if (counter - activeBugData.current.lastMotionChangeStep > GLOBALS.motionChangeSteps && Math.random() > 0.1) {
                 let deltax = GLOBALS.maxAccelerationChange * 0.2 + Math.random() * (GLOBALS.maxAccelerationChange * 0.8);
                 if (activeBugData.current.x > stageWidth || activeBugData.current.x < 0) {
                     deltax = 0;
@@ -263,9 +282,8 @@ export default function Bug({
                 }
             }
 
-            if (nearSite && Math.random() > 0.995) {
+            if (nearSite && Math.random() < GLOBALS.sitChance) {
                 // If on an ornament, check whether it is broken
-                console.log("On Ornament:", onOrnament)
                 setRequestBugSitting(onOrnament);
                 landingSiteRef.current = site;
             }
@@ -298,7 +316,6 @@ export default function Bug({
                 if (c > activeBugData.current.numBugSteps) {
                     setBugActive(false);
                     if (bugCount > 0) {
-                        console.log("Buzzed out");
                         setBugCount(prev => prev - 1);
                         setTimeout(() => {
                             setBugStart(true);
@@ -309,7 +326,6 @@ export default function Bug({
             }
         };
 
-        if (!bugActive) console.log("bug Inactive");
         if (bugActive) {
             app.ticker.add(moveBug);
         }
@@ -336,6 +352,8 @@ export default function Bug({
         setBugX, 
         setBugY, 
         setRequestBugSitting, 
+        swatterX,
+        swatterY,
         app])
 
     // Implement bug sitting if it applies
@@ -356,7 +374,6 @@ export default function Bug({
 
     // Allow for bug hit
     useEffect(() => {
-        console.log("bugHitScored", bugHitScored)
         if (bugHitScored) {
             setBugActive(false);
             setTimeout(() => {

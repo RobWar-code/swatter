@@ -1,7 +1,8 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Outlet
 } from "react-router-dom";
+import WebFont from 'webfontloader';
 import NavBar from '../components/NavBar';
 import DataLoader from '../components/DataLoader';
 
@@ -11,6 +12,20 @@ export default function Root() {
     const [dataFetchError, setDataFetchError] = useState(false);
     const [graphicDataFetched, setGraphicDataFetched] = useState(false);
     
+    // Font Loader
+    useEffect(() => {
+        WebFont.load({
+            custom: {
+                families: ['Kaushan'],
+                urls: ['../styles/index.css']
+            },
+            active: () => {
+                console.log("Font Loaded")
+            }  
+        })
+
+    }, [])
+
     return (
         <>
         {dataFetchError ? (

@@ -12,7 +12,9 @@ export default function Swatter({
     bugY,
     setSwatterStrikeX,
     setSwatterStrikeY,
-    setSwatterSwiped
+    setSwatterSwiped,
+    setSwatterX,
+    setSwatterY
 }) {
     const [initial, setInitial] = useState(true);
     const swatterData = useRef();
@@ -97,6 +99,8 @@ export default function Swatter({
                 setSwatterMoveLocationY(y);
                 swatterData.current.x = x;
                 swatterData.current.y = y;
+                setSwatterX(x);
+                setSwatterY(y);
                 setSwatterDataState(swatterData.current);
             }
         }

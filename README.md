@@ -192,9 +192,11 @@ calculated from the width of the stage, and a minimum speed of 1/5 of this.
 
 
 ## Code Set-up
+    npx create-react-app
     npm install react-router-dom
     npm install pixi.js @pixi/react
     npm install react-bootstrap
+    npm install webfontloader
     
 ## Schedule
 

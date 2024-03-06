@@ -90,7 +90,6 @@ export default function GamePage() {
             setBugCount(prevCount => prevCount - 1);
             setBugHitScored(true);
             setBugHit(false);
-            console.log("Bug Hit");
         }
     }, [bugHit])
 

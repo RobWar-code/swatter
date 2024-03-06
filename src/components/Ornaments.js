@@ -91,7 +91,6 @@ export default function Ornaments({
     // Check whether the ornament on which a fly may settle is broken
     useEffect (() => {
         // Check the ornament data
-        console.log("Request Bug Sitting:", requestBugSitting)
         let onBrokenOrnament = false;
         let shouldSit = false;
         if (requestBugSitting.indexOf("orna") !== -1) {
@@ -109,7 +108,6 @@ export default function Ornaments({
         else if (requestBugSitting === "no") {
             shouldSit = true;
         }
-        console.log("Should Sit:", shouldSit)
         setSittingDue(shouldSit);
         setRequestBugSitting("");
     }, [requestBugSitting, setRequestBugSitting, setSittingDue])
@@ -117,7 +115,7 @@ export default function Ornaments({
     // Check for reset of broken ornaments (when a game is completed)
     useEffect(() => {
         if (!initial && resetOrnaments) {
-            for (let item in ornamentData.current) {
+            for (let item of ornamentData.current) {
                 item.isBroken = false;
             }
             setOrnamentDataState(ornamentData.current);
