@@ -504,5 +504,15 @@
 		"textTop" : 272,
 		"textRight" : 702,
 		"textBottom" : 746
+	},
+	{
+		"type" : "score table",
+		"file" : "score-table.png",
+		"width" : 390,
+		"height" : 390,
+		"textLeft" : 142,
+		"textTop" : 80,
+		"textRight" : 251,
+		"textBottom" : 287
 	}
 ]

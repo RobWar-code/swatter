@@ -9,7 +9,7 @@ const GLOBALS = {
     bugReactionDistance: 50,
     sitChance: 0.003,
     sitTime: 100,
-    bugsPerGame: 6,
+    bugsPerGame: 1,
     bugHitScore: 10,
     ornamentBreakScore: -8
 }

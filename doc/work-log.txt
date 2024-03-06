@@ -2,6 +2,26 @@ Work Log
 
 <h1>Work Due
 
+    Do score table page
+
+    Include game start and next game modals
+
+    Incorporate sounds
+
+    Add sound enable control
+
+    Include game pause button on control panel
+
+    Include difficulty level slider
+
+    Update the README
+    
+    Notes on state management
+
+<h2>Work Done
+
+    06/03/2024
+
     * Display the ornaments on the stage
 
         * Use the public/static/images directory for the ornaments & bugs
@@ -16,7 +36,7 @@ Work Log
 
         * Increase the max flight speed
 
-        Swatter Avoidance Path Adjustments
+        * Swatter Avoidance Path Adjustments
 
     * Incorporate the swatter graphic
 
@@ -43,24 +63,6 @@ Work Log
         * Do Game Page Scoring
 
     * Reconstruct ornaments at start of new game
-
-    Do score table page
-
-    Include game start and next game modals
-
-    Incorporate sounds
-
-    Add sound enable control
-
-    Include game pause button on control panel
-
-    Include difficulty level slider
-
-    Update the README
-    
-    Notes on state management
-
-<h2>Work Done
 
     21/02/2024
     
