@@ -2,7 +2,11 @@ Work Log
 
 <h1>Work Due
 
-    Do score table page
+    * Do score table page
+
+    Allow for swatter over edge of stage
+
+    Check for hit bug when sitting (state flags?)
 
     Include game start and next game modals
 

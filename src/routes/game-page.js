@@ -5,9 +5,20 @@ import GameStage from '../components/GameStage';
 import ScoreChart from '../components/ScoreChart'
 import GLOBALS from '../constants/constants';
 
+
 export default function GamePage() {
-    const [,,graphicData] = useOutletContext();
-    const [scoreTable, setScoreTable] = useOutletContext();
+    const [graphicData, {
+        scoreTable, 
+        setScoreTable, 
+        gameNum, 
+        setGameNum, 
+        lastGameScore, 
+        setLastGameScore,
+        gameScore,
+        setGameScore,
+        bugCount,
+        setBugCount
+    }] = useOutletContext();
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
     const [stageScale, setStageScale] = useState(1);
@@ -19,10 +30,6 @@ export default function GamePage() {
     const alcoveWidth = useRef(0);
     const alcoveHeight = useRef(0);
     const stageCol = useRef(null);
-    const [gameNum, setGameNum] = useState(1);
-    const [lastGameScore, setLastGameScore] = useState(0);
-    const [gameScore, setGameScore] = useState(0);
-    const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
     const [resetOrnaments, setResetOrnaments] = useState(false);
     const [swatterSwiped, setSwatterSwiped] = useState(false);
     const [bugHit, setBugHit] = useState(0);
@@ -91,7 +98,7 @@ export default function GamePage() {
             setBugHitScored(true);
             setBugHit(false);
         }
-    }, [bugHit])
+    }, [bugHit, setBugCount, setGameScore])
 
     // Do the end of game scoring
     useEffect(() => {
@@ -103,7 +110,7 @@ export default function GamePage() {
             setResetOrnaments(true);
             setGameScore(0);
         }
-    }, [bugCount, gameScore, gameNum, setScoreTable])
+    }, [bugCount, gameScore, gameNum, setScoreTable, setLastGameScore, setGameNum, setBugCount, setGameScore])
 
     useEffect(() => {
         if (swatterSwiped) {
@@ -118,7 +125,7 @@ export default function GamePage() {
             setGameScore(prevScore => prevScore + GLOBALS.ornamentBreakScore);
             setOrnamentBroken(false);
         }
-    }, [ornamentBroken])
+    }, [ornamentBroken, setGameScore])
 
 
 

@@ -4,7 +4,7 @@ import {useOutletContext} from 'react-router-dom';
 import {Stage, Sprite, Text} from '@pixi/react';
 
 export default function ScorePage() {
-    const [scoreTable,,graphicData] = useOutletContext();
+    const [graphicData, {scoreTable}] = useOutletContext();
     const [tableWidth, setTableWidth] = useState(1200);
     const [tableHeight, setTableHeight] = useState(1200);
     const [scaleX, setScaleX] = useState(1);
@@ -18,6 +18,7 @@ export default function ScorePage() {
     const [gotScaleData, setGotScaleData] = useState(false);
     const textData = useRef();
     const [textDataState, setTextDataState] = useState([]);
+    const [gotTextData, setGotTextData] = useState(false);
 
     // Collect the graphic data for the table
     useEffect (() => {
@@ -44,14 +45,12 @@ export default function ScorePage() {
     
     const determineTableSize = () => {
         if (tableData.current) {
-            console.log("tableData:", tableData.current)
             const colWidth = tableCol.current.offsetWidth;
             const displayHeight = window.innerHeight - 100;
             let sx = colWidth / tableData.current.width;
             if (sx * tableData.current.height > displayHeight) {
                 sx = displayHeight / tableData.current.height;
             }
-            console.log("sx:", sx);
             setScaleX(sx);
             setScaleY(sx);
             setTableWidth(sx * tableData.current.width);
@@ -70,7 +69,6 @@ export default function ScorePage() {
             fontData.current.textCenter = fontData.current.textLeft + (fontData.current.textRight - fontData.current.textLeft) / 2;
             fontData.current.lineHeight = fontData.current.fontSize + 5;
             fontData.current.pageLines = Math.floor((fontData.current.textBottom - fontData.current.textTop) / fontData.current.lineHeight);
-            console.log("fontData:", fontData.current);
             setFontDataState(fontData.current);
             setGotScaleData(true);
         }
@@ -84,11 +82,13 @@ export default function ScorePage() {
 
         window.addEventListener("resize", handleResize);
 
-        determineTableSize();
+        if (gotTableData) {
+            determineTableSize();
+        }
 
         return () => window.removeEventListener("resize", handleResize)
 
-    }, [])
+    }, [gotTableData])
 
     // Set-up the data to display the scores
     useEffect (() => {
@@ -100,11 +100,11 @@ export default function ScorePage() {
                 x: fontData.current.textCenter - 6 * fontData.current.fontSize * 0.35,
                 y: fontData.current.textTop
             }
-            console.log("text1:", text1);
             textData.current.push(text1);
             let y = lineHeight + fontData.current.textTop;
             let x = fontData.current.textLeft + ((fontData.current.textCenter - fontData.current.textLeft) / 2) - 
                 2 * fontData.current.fontSize * 0.35;
+            const leftCol = x;
             let text2 = {
                 text: "Game",
                 x: x,
@@ -113,13 +113,36 @@ export default function ScorePage() {
             textData.current.push(text2);
             x = fontData.current.textCenter + ((fontData.current.textRight - fontData.current.textCenter) / 2) - 
                 2.5 * fontData.current.fontSize * 0.35;
+            const rightCol = x;
             let text3 = {
                 text: "Score",
                 x: x,
                 y: y
             };
             textData.current.push(text3);
+
+            // Scores
+            if (scoreTable.length > 0) {
+                let hiSort = scoreTable.sort((a, b) => b.score - a.score);
+                for (let i = 0; i < scoreTable.length && i < fontData.current.pageLines - 2; i++) {
+                    y += fontData.current.lineHeight;
+                    let textA = {
+                        text: hiSort[i].gameNum,
+                        x: leftCol,
+                        y: y
+                    }
+                    textData.current.push(textA);
+                    let textB = {
+                        text: hiSort[i].score,
+                        x: rightCol,
+                        y: y
+                    }
+                    textData.current.push(textB);
+                }
+            }
+
             setTextDataState(textData.current);
+            setGotTextData(true);
         }
     }, [scoreTable, gotScaleData])
     
@@ -137,7 +160,7 @@ export default function ScorePage() {
                                 x={0}
                                 y={0}
                             />
-                            {textDataState.length && 
+                            {gotTextData && 
                             <>
                                 {textDataState.map((item, index) => 
                                     <Text
