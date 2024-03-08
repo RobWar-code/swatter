@@ -95,6 +95,21 @@ export default function Swatter({
             let x = event.data.global.x;
             let y = event.data.global.y;
             if (!(x === swatterMoveLocationX && y === swatterMoveLocationY)) {
+                if (x <= 5 || x >= stageWidth - 15 || y <= 10 || y >= stageHeight - 15) {
+                    if (x <= 5) {
+                        x = 6;
+                    }
+                    else if(x >= stageWidth - 15) {
+                        x = stageWidth - 16;
+                    }
+                    if (y <= 10) {
+                        y = 11;
+                    }
+                    else if (y >= stageHeight - 15) {
+                        y = stageHeight - 16;
+                    }
+                    setSwatterActivated(false);
+                }
                 setSwatterMoveLocationX(x);
                 setSwatterMoveLocationY(y);
                 swatterData.current.x = x;
@@ -118,7 +133,7 @@ export default function Swatter({
             setSwatterDataState(swatterData.current);
             // Check for swat
             if (bugX > swatterData.current.x - 8 && bugX < swatterData.current.x + 8 &&
-                bugY > swatterData.current.y - 8 && bugY < swatterData.current.y + 25) {
+                bugY > swatterData.current.y - 20 && bugY < swatterData.current.y + 20) {
                 setBugHit(true);
             }
         }

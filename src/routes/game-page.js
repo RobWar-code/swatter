@@ -2,7 +2,9 @@ import {useState, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import GameStage from '../components/GameStage';
-import ScoreChart from '../components/ScoreChart'
+import ScoreChart from '../components/ScoreChart';
+import EaseControl from '../components/EaseControl';
+import IntroModal from '../components/IntroModal';
 import GLOBALS from '../constants/constants';
 
 
@@ -17,7 +19,9 @@ export default function GamePage() {
         gameScore,
         setGameScore,
         bugCount,
-        setBugCount
+        setBugCount,
+        introDone,
+        setIntroDone
     }] = useOutletContext();
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
@@ -37,7 +41,8 @@ export default function GamePage() {
     const [getOrnamentBroken, setGetOrnamentBroken] = useState(false);
     const [ornamentBroken, setOrnamentBroken] = useState(false);
     const [swatterStrikeX, setSwatterStrikeX] = useState(0);
-    const [swatterStrikeY, setSwatterStrikeY] = useState(0)
+    const [swatterStrikeY, setSwatterStrikeY] = useState(0);
+    const [gameEase, setGameEase] = useState(1);
 
     // Determine the stage and score chart sizes
     const determineStageSize = () => {
@@ -93,12 +98,12 @@ export default function GamePage() {
     // Do the scoring for a bug hit
     useEffect(() => {
         if (bugHit) {
-            setGameScore(prevScore => prevScore + GLOBALS.bugHitScore);
+            setGameScore(prevScore => prevScore + Math.floor(GLOBALS.bugHitScore * gameEase));
             setBugCount(prevCount => prevCount - 1);
             setBugHitScored(true);
             setBugHit(false);
         }
-    }, [bugHit, setBugCount, setGameScore])
+    }, [bugHit, gameEase, setBugCount, setGameScore])
 
     // Do the end of game scoring
     useEffect(() => {
@@ -127,8 +132,6 @@ export default function GamePage() {
         }
     }, [ornamentBroken, setGameScore])
 
-
-
     return (
         <Container>
             <Row>
@@ -154,6 +157,8 @@ export default function GamePage() {
                         setOrnamentBroken={setOrnamentBroken}
                         resetOrnaments={resetOrnaments}
                         setResetOrnaments={setResetOrnaments}
+                        gameEase={gameEase}
+                        introDone={introDone}
                     />
                 </Col>
                 <Col className="text-center" md={6}>
@@ -169,6 +174,17 @@ export default function GamePage() {
                         bugCount={bugCount}
                         scoreTable={scoreTable}
                     />
+                </Col>
+                {!introDone &&
+                    <IntroModal setIntroDone={setIntroDone} />
+                }
+            </Row>
+            <Row>
+                <Col md={5}>
+
+                </Col>
+                <Col className="text-center" md={7}>
+                    <EaseControl gameEase={gameEase} setGameEase={setGameEase} />
                 </Col>
             </Row>
         </Container>

@@ -16,6 +16,7 @@ export default function Root() {
     const [lastGameScore, setLastGameScore] = useState(0);
     const [gameScore, setGameScore] = useState(0);
     const [bugCount, setBugCount] = useState(GLOBALS.bugsPerGame);
+    const [introDone, setIntroDone] = useState(false);
 
     const contextVars = {
         scoreTable: scoreTable,
@@ -27,7 +28,9 @@ export default function Root() {
         gameScore: gameScore,
         setGameScore: setGameScore,
         bugCount: bugCount,
-        setBugCount: setBugCount
+        setBugCount: setBugCount,
+        introDone: introDone,
+        setIntroDone: setIntroDone
     }
     // Font Loader
     useEffect(() => {

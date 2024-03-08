@@ -4,11 +4,13 @@ Work Log
 
     * Do score table page
 
-    Allow for swatter over edge of stage
+    ? Allow for swatter over edge of stage
 
-    Check for hit bug when sitting (state flags?)
+    * Check for hit bug when sitting (state flags?)
 
-    Include game start and next game modals
+    Include game intro modal
+
+    Include game ended message on score chart - with time delay
 
     Incorporate sounds
 
@@ -16,7 +18,7 @@ Work Log
 
     Include game pause button on control panel
 
-    Include difficulty level slider
+    * Include difficulty level slider
 
     Update the README
     

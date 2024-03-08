@@ -21,7 +21,8 @@ export default function Bug({
     bugHitScored,
     setBugHitScored,
     swatterX,
-    swatterY
+    swatterY,
+    gameEase
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -165,7 +166,7 @@ export default function Bug({
             let dx = swatterX - activeBugData.current.x;
             let dy = swatterY - activeBugData.current.y;
             let d = Math.sqrt(dx ** 2 + dy ** 2);
-            if (d < GLOBALS.bugReactionDistance) {
+            if (d < Math.floor(GLOBALS.bugReactionDistance * gameEase)) {
                 if (dx < 0 && activeBugData.current.ax < 0) {
                     activeBugData.current.ax = GLOBALS.maxAcceleration;
                 }
@@ -179,8 +180,10 @@ export default function Bug({
                     activeBugData.current.ay = -GLOBALS.maxAcceleration;
                 }
             }
-            else if (counter - activeBugData.current.lastMotionChangeStep > GLOBALS.motionChangeSteps && Math.random() > 0.1) {
-                let deltax = GLOBALS.maxAccelerationChange * 0.2 + Math.random() * (GLOBALS.maxAccelerationChange * 0.8);
+            else if (counter - activeBugData.current.lastMotionChangeStep > GLOBALS.motionChangeSteps && Math.random() <
+                    0.1 *  gameEase) {
+                let deltax = gameEase * GLOBALS.maxAccelerationChange * 0.2 + Math.random() * 
+                    (gameEase * GLOBALS.maxAccelerationChange * 0.8);
                 if (activeBugData.current.x > stageWidth || activeBugData.current.x < 0) {
                     deltax = 0;
                 }
@@ -191,8 +194,8 @@ export default function Bug({
                     deltax = -deltax;
                 }
 
-                if (deltax + activeBugData.current.ax < GLOBALS.maxAcceleration && 
-                    deltax + activeBugData.current.ax > -GLOBALS.maxAcceleration) {
+                if (deltax + activeBugData.current.ax < gameEase * GLOBALS.maxAcceleration && 
+                    deltax + activeBugData.current.ax > -gameEase * GLOBALS.maxAcceleration) {
                     activeBugData.current.ax += deltax;
                     activeBugData.current.lastMotionChangeStep = counter;
                 }
@@ -201,15 +204,16 @@ export default function Bug({
                 if (activeBugData.current.y < 0 || activeBugData.current.y > stageHeight) {
                     deltay = 0;
                 }
-                else if (activeBugData.current.y > stageHeight * 0.68 && Math.random() < 0.8) {
+                else if (activeBugData.current.y > stageHeight * 0.75 && Math.random() < 
+                    GLOBALS.ornamentAttraction + (1 - GLOBALS.ornamentAttraction)/2 * gameEase) {
                     deltay = -deltay;
                 }
                 else if (Math.random() > 0.8) {
                     deltay = -deltay;
                 }
 
-                if (deltay + activeBugData.current.ay < GLOBALS.maxAcceleration && 
-                    deltay + activeBugData.current.ay > -GLOBALS.maxAcceleration) {
+                if (deltay + activeBugData.current.ay < gameEase * GLOBALS.maxAcceleration && 
+                    deltay + activeBugData.current.ay > -gameEase * GLOBALS.maxAcceleration) {
                     activeBugData.current.ay += deltay;
                     activeBugData.current.lastMotionChangeStep = counter;
                 }
@@ -219,22 +223,22 @@ export default function Bug({
         const performMotion = () => {
             // Adjust velocity
             activeBugData.current.vx += activeBugData.current.ax;
-            if (activeBugData.current.vx > GLOBALS.maxSpeed) {
-                activeBugData.current.vx = GLOBALS.maxSpeed;
+            if (activeBugData.current.vx > gameEase * GLOBALS.maxSpeed) {
+                activeBugData.current.vx = gameEase * GLOBALS.maxSpeed;
                 activeBugData.current.ax = 0;
             }
-            else if (activeBugData.current.vx < -GLOBALS.maxSpeed) {
-                activeBugData.current.vx = -GLOBALS.maxSpeed;
+            else if (activeBugData.current.vx < -gameEase * GLOBALS.maxSpeed) {
+                activeBugData.current.vx = -gameEase * GLOBALS.maxSpeed;
                 activeBugData.current.ax = 0;
             }
 
             activeBugData.current.vy += activeBugData.current.ay;
-            if (activeBugData.current.vy > GLOBALS.maxSpeed) {
-                activeBugData.current.vy = GLOBALS.maxSpeed;
+            if (activeBugData.current.vy > gameEase * GLOBALS.maxSpeed) {
+                activeBugData.current.vy = gameEase * GLOBALS.maxSpeed;
                 activeBugData.current.ay = 0;
             }
-            else if (activeBugData.current.vy < -GLOBALS.maxSpeed) {
-                activeBugData.current.vy = -GLOBALS.maxSpeed;
+            else if (activeBugData.current.vy < -gameEase * GLOBALS.maxSpeed) {
+                activeBugData.current.vy = -gameEase * GLOBALS.maxSpeed;
                 activeBugData.current.ay = 0;
             }
 
@@ -354,6 +358,7 @@ export default function Bug({
         setRequestBugSitting, 
         swatterX,
         swatterY,
+        gameEase,
         app])
 
     // Implement bug sitting if it applies
