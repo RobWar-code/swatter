@@ -22,6 +22,11 @@ export default function IntroModal({setIntroDone}) {
                     or touch down on the swatter. To make a strike, lift the mouse button or 
                     touch off.
                 </p>
+                <p>
+                    If you move the swatter over the edge of stage, touch off or release the
+                    click button, touch or click somewhere else on the stage and then click
+                    or touch on the swatter again.
+                </p>
             </Modal.Body>
     
             <Modal.Footer>

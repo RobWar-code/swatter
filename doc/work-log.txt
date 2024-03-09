@@ -4,17 +4,17 @@ Work Log
 
     * Do score table page
 
-    ? Allow for swatter over edge of stage
+    ? Allow for swatter over edge of stage - how best to fix
 
     * Check for hit bug when sitting (state flags?)
 
     * Include game intro modal
 
-		Include note on swatter over edge
+		* Include note on swatter over edge
 
     Consider bonus for striking all bugs.
 
-    Include game ended message on score chart - with time delay
+    * Include game ended message on score chart - with time delay
 
     Incorporate sounds
 
