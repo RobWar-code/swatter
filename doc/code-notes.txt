@@ -8,6 +8,7 @@ General Notes on Coding for this project
         Animated Bitmap Images
         React State Management
             Preserving States on Page Components
+        Using timeOut Functions in useEffect Functions
         Local Fonts for PIXI
 
 <h1>Using the Webpack Context for Images
@@ -180,7 +181,25 @@ General Notes on Coding for this project
     relevant page component. Typically the higher member might be the root component,
     in which case a context variable should be used to transfer the required states
     declared in the root component.
-    
+
+<h1>Using timeOut Functions in useEffect Functions
+    It is necessary for timeOut functions useEffect functions to use useCallback
+    functions to operate correctly. ie:
+
+        import {useCallback, useEffect} from 'react'
+
+        const myTimedAction = useCallback(() => {
+            setMyState(true);
+        },[setMyState])
+
+        useEffect(() => {
+            ..
+            setTimeout(() => {
+                setMyState();
+            }, 5000)
+            ..
+        }, [setMyState])
+
 <h1>Local Fonts for PIXI
 
     It is possible to use local decorative fonts for PIXI (ie those that are available 
@@ -214,3 +233,4 @@ General Notes on Coding for this project
         }, [])
 
     Then use the font-family: "myFont" in the Text sprite.
+

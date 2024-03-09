@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useCallback} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import GameStage from '../components/GameStage';
@@ -43,6 +43,7 @@ export default function GamePage() {
     const [swatterStrikeX, setSwatterStrikeX] = useState(0);
     const [swatterStrikeY, setSwatterStrikeY] = useState(0);
     const [gameEase, setGameEase] = useState(1);
+    const [gameEnd, setGameEnd] = useState(false);
 
     // Determine the stage and score chart sizes
     const determineStageSize = () => {
@@ -99,23 +100,31 @@ export default function GamePage() {
     useEffect(() => {
         if (bugHit) {
             setGameScore(prevScore => prevScore + Math.floor(GLOBALS.bugHitScore * gameEase));
-            setBugCount(prevCount => prevCount - 1);
             setBugHitScored(true);
+            setBugCount(prevCount => prevCount - 1);
             setBugHit(false);
         }
     }, [bugHit, gameEase, setBugCount, setGameScore])
 
+    const setGameStartStates = useCallback(() => {
+        console.log("Timed Game End Operations")
+        setGameNum(prev => prev + 1);
+        setBugCount(GLOBALS.bugsPerGame);
+        setResetOrnaments(true);
+        setLastGameScore(gameScore);
+        setGameScore(0);
+    }, [gameScore, setBugCount, setGameNum, setGameScore, setLastGameScore])
+
     // Do the end of game scoring
     useEffect(() => {
         if (bugCount <= 0) {
-            setLastGameScore(gameScore);
+            setGameEnd(true);
             setScoreTable(prev => [...prev, {score: gameScore, gameNum: gameNum}]);
-            setGameNum(prev => prev + 1);
-            setBugCount(GLOBALS.bugsPerGame);
-            setResetOrnaments(true);
-            setGameScore(0);
+            setTimeout(() => {
+                setGameStartStates();
+            }, 10000);
         }
-    }, [bugCount, gameScore, gameNum, setScoreTable, setLastGameScore, setGameNum, setBugCount, setGameScore])
+    }, [bugCount, gameNum, gameScore, setScoreTable, setGameStartStates])
 
     useEffect(() => {
         if (swatterSwiped) {
@@ -159,6 +168,7 @@ export default function GamePage() {
                         setResetOrnaments={setResetOrnaments}
                         gameEase={gameEase}
                         introDone={introDone}
+                        gameEnd={gameEnd}
                     />
                 </Col>
                 <Col className="text-center" md={6}>
@@ -173,6 +183,8 @@ export default function GamePage() {
                         gameScore={gameScore}
                         bugCount={bugCount}
                         scoreTable={scoreTable}
+                        gameEnd={gameEnd}
+                        setGameEnd={setGameEnd}
                     />
                 </Col>
                 {!introDone &&

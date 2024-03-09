@@ -1,5 +1,5 @@
 import {Sprite} from '@pixi/react';
-import {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect, useCallback} from 'react';
 import {useApp} from '@pixi/react';
 import * as PIXI from 'pixi.js';
 import GLOBALS from '../constants/constants';
@@ -22,7 +22,8 @@ export default function Bug({
     setBugHitScored,
     swatterX,
     swatterY,
-    gameEase
+    gameEase,
+    gameEnd
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -35,13 +36,6 @@ export default function Bug({
     const landingSites = useRef();
     const landingSiteRef = useRef();
     const app = useApp();
-
-    const imageNameFromFile = (filename) => {
-        let p = filename.indexOf('.');
-        let f = filename.substring(0,p - 1);
-        f = f.replace("-", "_");
-        return f;
-    }
 
     const imageLoader = (filename) => {
         let texture;
@@ -158,6 +152,10 @@ export default function Bug({
         }
 
     }, [bugStart, stageWidth, stageHeight, setBugStart])
+
+    const startBugAction = useCallback(() => {
+        setBugStart(true);
+    }, [setBugStart])
 
     // Handle the active state of the current bug
     useEffect(() => {
@@ -321,9 +319,11 @@ export default function Bug({
                     setBugActive(false);
                     if (bugCount > 0) {
                         setBugCount(prev => prev - 1);
+                        let delay = 3000;
+                        if (bugCount === 1) delay = 10000;
                         setTimeout(() => {
-                            setBugStart(true);
-                        }, 2000);
+                            startBugAction();
+                        }, delay);
                     }
                     setCounter(0);
                 }
@@ -359,6 +359,7 @@ export default function Bug({
         swatterX,
         swatterY,
         gameEase,
+        startBugAction,
         app])
 
     // Implement bug sitting if it applies
@@ -381,12 +382,14 @@ export default function Bug({
     useEffect(() => {
         if (bugHitScored) {
             setBugActive(false);
+            let delay = 3000;
+            if (gameEnd) delay = 10000;
             setTimeout(() => {
-                setBugStart(true);
-            }, 3000);
+                startBugAction();
+            }, delay);
             setBugHitScored(false);
         }
-    }, [bugHitScored, setBugHitScored, setBugStart])
+    }, [gameEnd, bugHitScored, setBugHitScored, startBugAction])
 
     return (
         <>

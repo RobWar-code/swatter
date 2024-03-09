@@ -8,7 +8,11 @@ Work Log
 
     * Check for hit bug when sitting (state flags?)
 
-    Include game intro modal
+    * Include game intro modal
+
+		Include note on swatter over edge
+
+    Consider bonus for striking all bugs.
 
     Include game ended message on score chart - with time delay
 

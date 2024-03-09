@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState, useRef, useCallback} from 'react';
 import {Stage, Sprite, Text} from '@pixi/react';
 
 
@@ -12,7 +12,9 @@ export default function ScoreChart({
     lastGameScore,
     gameScore,
     bugCount,
-    scoreTable
+    scoreTable,
+    gameEnd,
+    setGameEnd
 }) {
     const [initial, setInitial] = useState(true);
     const scoreChartData = useRef();
@@ -121,6 +123,20 @@ export default function ScoreChart({
 
     }, [gameScore, lastGameScore, scoreTable, bugCount, gameNum, scoreChartScaleX, scoreChartScaleY])
 
+    const clearGameEnd = useCallback(() => {
+        console.log("Clearing gameEnd");
+        setGameEnd(false);
+    }, [setGameEnd])
+
+    // Game End State
+    useEffect(() => {
+        if (gameEnd) {
+            setTimeout(() => {
+                clearGameEnd();
+            }, 10000);
+        }
+    }, [gameEnd, clearGameEnd])
+
     return (
         <Stage width={scoreChartWidth} height={scoreChartHeight}>
             {!initial && 
@@ -147,6 +163,23 @@ export default function ScoreChart({
                 }
             />
             )}
+            {gameEnd &&
+                <>
+                <Text
+                    text="Game End"
+                    anchor={{x: 0.5, y: 0}}
+                    x={fontLayoutState.textCenter}
+                    y={(fontLayoutState.fontSize + 5) * 7 + fontLayoutState.textTop}
+                    style={{
+                        fontFamily: fontLayoutState.font,
+                        fontSize: fontLayoutState.fontSize,
+                        fill: fontLayoutState.fill,
+                        stroke: fontLayoutState.stroke
+                    }
+                }
+                />
+                </>
+            }
             </>
             }
         </Stage>

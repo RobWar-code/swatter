@@ -26,7 +26,8 @@ export default function GameStage({
     resetOrnaments,
     setResetOrnaments,
     gameEase,
-    introDone
+    introDone,
+    gameEnd
 }) {
     const [bugStart, setBugStart] = useState(false);
     const [requestBugSitting, setRequestBugSitting] = useState("");
@@ -79,6 +80,7 @@ export default function GameStage({
                 swatterX={swatterX}
                 swatterY={swatterY}
                 gameEase={gameEase}
+                gameEnd={gameEnd}
             />
             }
             <Swatter
