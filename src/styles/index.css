@@ -6,3 +6,7 @@
 .navItem:hover {
     background-color: beige;
 }
+
+.soundControl {
+    margin-right: 5px;
+}

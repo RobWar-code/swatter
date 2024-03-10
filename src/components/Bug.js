@@ -23,7 +23,9 @@ export default function Bug({
     swatterX,
     swatterY,
     gameEase,
-    gameEnd
+    gameEnd,
+    setDoSound,
+    pauseOn
 }) {
     const [initial, setInitial] = useState(true);
     const [counter, setCounter] = useState(0);
@@ -35,6 +37,7 @@ export default function Bug({
     const numBugs = useRef();
     const landingSites = useRef();
     const landingSiteRef = useRef();
+    const [bugWasActive, setBugWasActive] = useState(false);
     const app = useApp();
 
     const imageLoader = (filename) => {
@@ -148,10 +151,11 @@ export default function Bug({
             setBugStart(false);
             setActiveBugDataState(activeBugData.current);
             setBugActive(true);
+            setDoSound("bee-buzzing");
             setCounter(0);
         }
 
-    }, [bugStart, stageWidth, stageHeight, setBugStart])
+    }, [bugStart, setDoSound, stageWidth, stageHeight, setBugStart])
 
     const startBugAction = useCallback(() => {
         setBugStart(true);
@@ -317,6 +321,7 @@ export default function Bug({
                 setCounter(c);
                 if (c > activeBugData.current.numBugSteps) {
                     setBugActive(false);
+                    setDoSound("leaving-buzz");
                     if (bugCount > 0) {
                         setBugCount(prev => prev - 1);
                         let delay = 3000;
@@ -360,6 +365,7 @@ export default function Bug({
         swatterY,
         gameEase,
         startBugAction,
+        setDoSound,
         app])
 
     // Implement bug sitting if it applies
@@ -390,6 +396,19 @@ export default function Bug({
             setBugHitScored(false);
         }
     }, [gameEnd, bugHitScored, setBugHitScored, startBugAction])
+
+    // Allow for pause
+    useEffect (() => {
+        if (pauseOn) {
+            console.log("Bug Paused");
+            if (bugActive) setBugWasActive(true);
+            setBugActive(false);
+        }
+        else if (bugWasActive) {
+            setBugActive(true);
+            setBugWasActive(false);
+        }
+    }, [pauseOn, bugActive, bugWasActive])
 
     return (
         <>

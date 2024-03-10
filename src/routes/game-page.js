@@ -5,6 +5,8 @@ import GameStage from '../components/GameStage';
 import ScoreChart from '../components/ScoreChart';
 import EaseControl from '../components/EaseControl';
 import IntroModal from '../components/IntroModal';
+import SoundControl from '../components/SoundControl';
+import PauseControl from '../components/PauseControl';
 import GLOBALS from '../constants/constants';
 
 
@@ -44,6 +46,9 @@ export default function GamePage() {
     const [swatterStrikeY, setSwatterStrikeY] = useState(0);
     const [gameEase, setGameEase] = useState(1);
     const [gameEnd, setGameEnd] = useState(false);
+    const [soundEnabled, setSoundEnabled] = useState(false);
+    const [doSound, setDoSound] = useState("");
+    const [pauseOn, setPauseOn] = useState(false);
 
     // Determine the stage and score chart sizes
     const determineStageSize = () => {
@@ -99,6 +104,7 @@ export default function GamePage() {
     // Do the scoring for a bug hit
     useEffect(() => {
         if (bugHit) {
+            setDoSound("splat");
             setGameScore(prevScore => prevScore + Math.floor(GLOBALS.bugHitScore * gameEase));
             setBugHitScored(true);
             setBugCount(prevCount => prevCount - 1);
@@ -169,6 +175,8 @@ export default function GamePage() {
                         gameEase={gameEase}
                         introDone={introDone}
                         gameEnd={gameEnd}
+                        setDoSound={setDoSound}
+                        pauseOn={pauseOn}
                     />
                 </Col>
                 <Col className="text-center" md={6}>
@@ -192,10 +200,17 @@ export default function GamePage() {
                 }
             </Row>
             <Row>
-                <Col md={5}>
-
+                <Col md={6}>
+                    <SoundControl 
+                        className="soundControl"
+                        soundEnabled={soundEnabled} 
+                        setSoundEnabled={setSoundEnabled}
+                        doSound={doSound}
+                        setDoSound={setDoSound}
+                    />
+                    <PauseControl pauseOn={pauseOn} setPauseOn={setPauseOn} />
                 </Col>
-                <Col className="text-center" md={7}>
+                <Col className="text-center" md={6}>
                     <EaseControl gameEase={gameEase} setGameEase={setGameEase} />
                 </Col>
             </Row>

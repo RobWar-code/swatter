@@ -14,7 +14,8 @@ export default function Ornaments({
     sittingDue,
     setSittingDue,
     resetOrnaments,
-    setResetOrnaments
+    setResetOrnaments,
+    setDoSound
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
@@ -78,6 +79,7 @@ export default function Ornaments({
             }
             if (found) {
                 if (!ornament.isBroken) {
+                    setDoSound("crash");
                     setOrnamentBroken(true);
                     ornament.isBroken = true;
                     setOrnamentDataState(ornamentData.current);
@@ -86,7 +88,7 @@ export default function Ornaments({
             setGetOrnamentBroken(false);
         }
 
-    }, [getOrnamentBroken, setGetOrnamentBroken, setOrnamentBroken, swatterStrikeX, swatterStrikeY])
+    }, [getOrnamentBroken, setGetOrnamentBroken, setOrnamentBroken, swatterStrikeX, swatterStrikeY, setDoSound])
 
     // Check whether the ornament on which a fly may settle is broken
     useEffect (() => {

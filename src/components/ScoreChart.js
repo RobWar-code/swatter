@@ -166,7 +166,7 @@ export default function ScoreChart({
             {gameEnd &&
                 <>
                 <Text
-                    text="Game End"
+                    text="Game End - Next Shortly"
                     anchor={{x: 0.5, y: 0}}
                     x={fontLayoutState.textCenter}
                     y={(fontLayoutState.fontSize + 5) * 7 + fontLayoutState.textTop}
