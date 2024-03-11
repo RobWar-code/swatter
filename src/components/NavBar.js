@@ -23,6 +23,7 @@ function NavBar() {
           <Nav className="me-auto nav">
             <Nav.Link className="navItem" as={Link} to="/">Game</Nav.Link>
             <Nav.Link className="navItem" as={Link} to="/scores">Scores</Nav.Link>
+            <Nav.Link className="navItem" as={Link} to="/credits">Credits</Nav.Link>
             <Nav.Link className="navItem" href="https://narayana-art.co.uk/ZingGames/ZingGames.php">Zing</Nav.Link>
           </Nav>
         </Navbar.Collapse>

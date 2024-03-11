@@ -20,6 +20,8 @@ Work Log
 
     * Add sound enable control
 
+        Replace the sounds that have commercial restrictions
+
     * Include game pause button on control panel
 
     Game Credits

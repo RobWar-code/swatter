@@ -514,5 +514,16 @@
 		"textTop" : 80,
 		"textRight" : 251,
 		"textBottom" : 287
+	},
+	{
+		"type" : "credit sheet",
+		"file" : "credit-sheet.webp",
+		"width" : 1024,
+		"height" : 1024,
+		"textLeft" : 310,
+		"textTop" : 294,
+		"textRight" : 728,
+		"textBottom" : 802
 	}
+
 ]

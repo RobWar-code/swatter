@@ -8,6 +8,7 @@ import "./styles/index.css";
 import Root from "./routes/root.js";
 import GamePage from "./routes/game-page.js";
 import ScorePage from "./routes/score-page.js";
+import CreditsPage from "./routes/credits-page.js";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/scores",
                 element: <ScorePage />
+            },
+            {
+                path: "/credits",
+                element: <CreditsPage />
             }
         ]
     }
