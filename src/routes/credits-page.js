@@ -18,6 +18,7 @@ export default function CreditsPage() {
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(390);
     const textCol = useRef(null);
+    const httpElement = useRef([]);
 
     // Obtain the image data
     useEffect(() => {
@@ -91,88 +92,136 @@ export default function CreditsPage() {
         if (gotScaledData) {
             textData.current = [];
             let text1 = {
+                id: 1,
                 text: "Credits",
                 anchor: {x:0.5, y:0},
                 x: imageData.current.textCenter,
-                y: imageData.current.textTop
+                y: imageData.current.textTop,
+                http: false
             };
             textData.current.push(text1);
             let y = imageData.current.textTop + imageData.current.lineHeight;
             let text2 = {
+                id: 2,
                 text: "Sounds",
                 anchor: {x:0.5, y:0},
                 x: imageData.current.textCenter,
-                y: y
+                y: y,
+                http: false
             };
             textData.current.push(text2);
             y += imageData.current.lineHeight;
             let text3 = {
+                id: 3,
                 text: "Bee Buzzing - Author DrDufus",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: false
             };
             textData.current.push(text3);
             y += imageData.current.lineHeight;
             let text4 = {
+                id: 4,
                 text: "https://freesound.org/people/DrDufus/sounds/462875/",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: true
             };
             textData.current.push(text4);
             y += imageData.current.lineHeight + 2;
             let text5 = {
+                id: 5,
                 text: "Leaving Buzz - funwithsound",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: false
             };
             textData.current.push(text5);
             y += imageData.current.lineHeight;
             let text6= {
+                id: 6,
                 text: "https://freesound.org/people/FunWithSound/sounds/390733/",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: true
             };
             textData.current.push(text6);
             y += imageData.current.lineHeight + 2;
             let text7= {
+                id: 7,
                 text: "Splat - sebastiantate",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: false
             };
             textData.current.push(text7);
             y += imageData.current.lineHeight;
             let text8= {
+                id: 8,
                 text: "https://freesound.org/people/sebastientate/sounds/719131/",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: true
             };
             textData.current.push(text8);
             y += imageData.current.lineHeight + 2;
             let text9= {
+                id: 9,
                 text: "Crash - DNABeast",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: false
             };
             textData.current.push(text9);
             y += imageData.current.lineHeight;
             let text10 = {
+                id: 10,
                 text: "https://freesound.org/people/DNABeast/sounds/127200/",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
-                y: y
+                y: y,
+                http: true
             };
             textData.current.push(text10);
+            y += imageData.current.lineHeight;
+
+            let text11 = {
+                id: 11,
+                text: "Images",
+                anchor: {x:0.5, y:0},
+                x: imageData.current.textCenter,
+                y: y,
+                http: false
+            };
+            textData.current.push(text11);
+            y += imageData.current.lineHeight;
+            let text12 = {
+                id: 12,
+                text: "Images courtesy ChatGPT/DALL-E - reworked",
+                anchor: {x:0, y:0},
+                x: imageData.current.textLeft,
+                y: y,
+                http: false
+            };
+            textData.current.push(text12);
+            
             setGotTextData(true);
             setTextDataState(textData.current);
         }
     }, [gotScaledData])
+
+    const doLink = (event) => {
+        const link = event.target.text;
+        window.open(link, "_blank");
+        console.log("Got link:", link);
+    }
 
     return (
         <Row>
@@ -189,20 +238,41 @@ export default function CreditsPage() {
                             y={0}
                         />
                         {
-                            textDataState.map((item, index) =>
-                                <Text
-                                    key={index}
-                                    text={item.text}
-                                    anchor={item.anchor}
-                                    x={item.x}
-                                    y={item.y}
-                                    style={{
-                                        font: imageDataState.font,
-                                        fontSize: imageDataState.fontSize,
-                                        fill: imageDataState.fill,
-                                        stroke: imageDataState.stroke
-                                    }}
-                                />
+                            textDataState.map((item) =>
+                                <>
+                                {item.http ? (
+                                    <Text
+                                        key={item.id}
+                                        eventMode={'dynamic'}
+                                        pointerdown={doLink}
+                                        text={item.text}
+                                        anchor={item.anchor}
+                                        x={item.x}
+                                        y={item.y}
+                                        style={{
+                                            font: imageDataState.font,
+                                            fontSize: imageDataState.fontSize,
+                                            fill: imageDataState.fill,
+                                            stroke: imageDataState.stroke
+                                        }}
+                                    />
+                                ) : (
+                                    <Text
+                                        key={item.id}
+                                        text={item.text}
+                                        anchor={item.anchor}
+                                        x={item.x}
+                                        y={item.y}
+                                        style={{
+                                            font: imageDataState.font,
+                                            fontSize: imageDataState.fontSize,
+                                            fill: imageDataState.fill,
+                                            stroke: imageDataState.stroke
+                                        }}
+                                    />
+                                )
+                                }
+                                </>
                             )
                         }
                         </>
