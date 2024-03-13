@@ -18,7 +18,7 @@ export default function CreditsPage() {
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(390);
     const textCol = useRef(null);
-    const httpElement = useRef([]);
+    const httpLookUp = useRef();
 
     // Obtain the image data
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function CreditsPage() {
             imageData.current.textRight = imageStats.textRight * sx;
             imageData.current.textBottom = imageStats.textBottom * sx;
             imageData.current.textCenter = (imageStats.textLeft + (imageStats.textRight - imageStats.textLeft) / 2) * sx;
-            imageData.current.fontSize = 17 * sx;
+            imageData.current.fontSize = 28 * sx;
             imageData.current.lineHeight = imageData.current.fontSize + 5;
     
             imageData.current.font = "Helvetica, sans-serif";
@@ -113,24 +113,23 @@ export default function CreditsPage() {
             y += imageData.current.lineHeight;
             let text3 = {
                 id: 3,
-                text: "Bee Buzzing - Author DrDufus",
+                text: "Bee Buzzing - DrDufus",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
                 y: y,
                 http: false
             };
             textData.current.push(text3);
-            y += imageData.current.lineHeight;
             let text4 = {
                 id: 4,
-                text: "https://freesound.org/people/DrDufus/sounds/462875/",
+                text: "Link",
                 anchor: {x:0, y:0},
-                x: imageData.current.textLeft,
+                x: imageData.current.textCenter + (imageData.current.textRight - imageData.current.textCenter) * 4/5,
                 y: y,
                 http: true
             };
             textData.current.push(text4);
-            y += imageData.current.lineHeight + 2;
+            y += imageData.current.lineHeight;
             let text5 = {
                 id: 5,
                 text: "Leaving Buzz - funwithsound",
@@ -140,17 +139,16 @@ export default function CreditsPage() {
                 http: false
             };
             textData.current.push(text5);
-            y += imageData.current.lineHeight;
             let text6= {
                 id: 6,
-                text: "https://freesound.org/people/FunWithSound/sounds/390733/",
+                text: "Link",
                 anchor: {x:0, y:0},
-                x: imageData.current.textLeft,
+                x: imageData.current.textCenter + (imageData.current.textRight - imageData.current.textCenter) * 4/5,
                 y: y,
                 http: true
             };
             textData.current.push(text6);
-            y += imageData.current.lineHeight + 2;
+            y += imageData.current.lineHeight;
             let text7= {
                 id: 7,
                 text: "Splat - sebastiantate",
@@ -160,17 +158,16 @@ export default function CreditsPage() {
                 http: false
             };
             textData.current.push(text7);
-            y += imageData.current.lineHeight;
             let text8= {
                 id: 8,
-                text: "https://freesound.org/people/sebastientate/sounds/719131/",
+                text: "Link",
                 anchor: {x:0, y:0},
-                x: imageData.current.textLeft,
+                x: imageData.current.textCenter + (imageData.current.textRight - imageData.current.textCenter) * 4/5,
                 y: y,
                 http: true
             };
             textData.current.push(text8);
-            y += imageData.current.lineHeight + 2;
+            y += imageData.current.lineHeight;
             let text9= {
                 id: 9,
                 text: "Crash - DNABeast",
@@ -180,12 +177,11 @@ export default function CreditsPage() {
                 http: false
             };
             textData.current.push(text9);
-            y += imageData.current.lineHeight;
             let text10 = {
                 id: 10,
-                text: "https://freesound.org/people/DNABeast/sounds/127200/",
+                text: "Link",
                 anchor: {x:0, y:0},
-                x: imageData.current.textLeft,
+                x: imageData.current.textCenter + (imageData.current.textRight - imageData.current.textCenter) * 4/5,
                 y: y,
                 http: true
             };
@@ -204,7 +200,7 @@ export default function CreditsPage() {
             y += imageData.current.lineHeight;
             let text12 = {
                 id: 12,
-                text: "Images courtesy ChatGPT/DALL-E - reworked",
+                text: "Images courtesy ChatGPT/DALL-E",
                 anchor: {x:0, y:0},
                 x: imageData.current.textLeft,
                 y: y,
@@ -212,15 +208,39 @@ export default function CreditsPage() {
             };
             textData.current.push(text12);
             
+            // Http Look-Up
+            httpLookUp.current = [];
+            let http1 = {key: 3, http: "https://freesound.org/people/DrDufus/sounds/462875/"};
+            httpLookUp.current.push(http1);
+            let http2 = {key: 5, http: "https://freesound.org/people/FunWithSound/sounds/390733/"};
+            httpLookUp.current.push(http2);
+            let http3 = {key: 7, http: "https://freesound.org/people/sebastientate/sounds/719131/"};
+            httpLookUp.current.push(http3);
+            let http4 = {key: 9, http: "https://freesound.org/people/DNABeast/sounds/127200/"};
+            httpLookUp.current.push(http4);
+
             setGotTextData(true);
             setTextDataState(textData.current);
         }
     }, [gotScaledData])
 
-    const doLink = (event) => {
-        const link = event.target.text;
-        window.open(link, "_blank");
-        console.log("Got link:", link);
+    const doLink = (index) => {
+        // Look-up the link
+        let found = false;
+        let item;
+        for (item of httpLookUp.current) {
+            if (item.key === index) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            const link = item.http;
+            window.open(link, "_blank");
+        }
+        else {
+            console.log("Could not find credits link:", index);
+        }
     }
 
     return (
@@ -238,13 +258,13 @@ export default function CreditsPage() {
                             y={0}
                         />
                         {
-                            textDataState.map((item) =>
+                            textDataState.map((item, index) =>
                                 <>
                                 {item.http ? (
                                     <Text
                                         key={item.id}
                                         eventMode={'dynamic'}
-                                        pointerdown={doLink}
+                                        pointerdown={() => doLink(index)}
                                         text={item.text}
                                         anchor={item.anchor}
                                         x={item.x}
@@ -252,6 +272,7 @@ export default function CreditsPage() {
                                         style={{
                                             font: imageDataState.font,
                                             fontSize: imageDataState.fontSize,
+                                            fontStyle: 'italic',
                                             fill: imageDataState.fill,
                                             stroke: imageDataState.stroke
                                         }}

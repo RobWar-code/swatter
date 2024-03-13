@@ -102,7 +102,7 @@ Check whether score chart updated
 
 ! Check that links are working
 
-Check legibility
+! Check legibility
 
 ## General
 
@@ -113,10 +113,10 @@ spurious messages
 
 |      | Game | Score Sheet | Credits |
 | ---- | ---- | ----------- | ------- |
-| 1200 |      |             |         |
-| 900  |      |             |         |
-| 600  |      |             |         |
-| 400  |      |             |         |
+| 1200 |  *   |      *      |    *    |
+| 900  |  *   |      *      |    *    |
+| 600  |  *   |      *      |    *    |
+| 400  |  *   |      *      |    *    |
 
 ## Browsers
 

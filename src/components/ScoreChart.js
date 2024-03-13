@@ -26,7 +26,7 @@ export default function ScoreChart({
 
     useEffect(() => {
         // Collect the image data
-        if (initial && globalImageData) {
+        if (initial && globalImageData.length) {
             scoreChartData.current = {}
             let found = false;
             for (let item of globalImageData) {
@@ -61,67 +61,68 @@ export default function ScoreChart({
             return fontLayout;
         }
 
-        fontLayout.current = getFontLayoutDetails();
+        if (scoreChartDataState.textTop) {
+            fontLayout.current = getFontLayoutDetails();
 
-        // Setup the font details
-        fontLayout.current.font = "Kaushan, Helvetica, sans-serif";
-        fontLayout.current.fill = ['#ffffff', '#ffffff'];
-        fontLayout.current.stroke = '#ffffff';
+            // Setup the font details
+            fontLayout.current.font = "Kaushan, Helvetica, sans-serif";
+            fontLayout.current.fill = ['#ffffff', '#ffffff'];
+            fontLayout.current.stroke = '#ffffff';
 
-        // Setup the text
-        scoreText.current = [];
-        let lineY = 0;
-        let text1 = {
-            text: "Score Chart",
-            x: fontLayout.current.textCenter - 6 * (fontLayout.current.fontSize * 1/2.7),
-            y: fontLayout.current.textTop
-        }
-        scoreText.current.push(text1);
-        lineY += fontLayout.current.fontSize + 5;
-        let text2 = {
-            text: "Game Number: " + gameNum,
-            x: fontLayout.current.textLeft,
-            y: fontLayout.current.textTop + lineY
-        }
-        scoreText.current.push(text2);
-        lineY += fontLayout.current.fontSize + 5;
-        let text3 = {
-            text: "Bugs Remaining: " + bugCount,
-            x: fontLayout.current.textLeft,
-            y: fontLayout.current.textTop + lineY
-        }
-        scoreText.current.push(text3);
-        lineY += fontLayout.current.fontSize + 5;
-        let text4 = {
-            text: "Game Score: " + gameScore,
-            x: fontLayout.current.textLeft,
-            y: fontLayout.current.textTop + lineY
-        }
-        scoreText.current.push(text4);
-        lineY += fontLayout.current.fontSize + 5;
-        let text5 = {
-            text: "Last Game: " + lastGameScore,
-            x: fontLayout.current.textLeft,
-            y: fontLayout.current.textTop + lineY
-        }
-        scoreText.current.push(text5);
-        lineY += fontLayout.current.fontSize + 5;
-        // Determine the high score
-        let highScore = 0;
-        if (scoreTable.length) {
-            highScore = Math.max(...scoreTable.map(item => item.score));
-        }
-        let text6 = {
-            text: "High Score: " + highScore,
-            x: fontLayout.current.textLeft,
-            y: fontLayout.current.textTop + lineY
-        }
-        scoreText.current.push(text6);
+            // Setup the text
+            scoreText.current = [];
+            let lineY = 0;
+            let text1 = {
+                text: "Score Chart",
+                x: fontLayout.current.textCenter - 6 * (fontLayout.current.fontSize * 1/2.7),
+                y: fontLayout.current.textTop
+            }
+            scoreText.current.push(text1);
+            lineY += fontLayout.current.fontSize + 5;
+            let text2 = {
+                text: "Game Number: " + gameNum,
+                x: fontLayout.current.textLeft,
+                y: fontLayout.current.textTop + lineY
+            }
+            scoreText.current.push(text2);
+            lineY += fontLayout.current.fontSize + 5;
+            let text3 = {
+                text: "Bugs Remaining: " + bugCount,
+                x: fontLayout.current.textLeft,
+                y: fontLayout.current.textTop + lineY
+            }
+            scoreText.current.push(text3);
+            lineY += fontLayout.current.fontSize + 5;
+            let text4 = {
+                text: "Game Score: " + gameScore,
+                x: fontLayout.current.textLeft,
+                y: fontLayout.current.textTop + lineY
+            }
+            scoreText.current.push(text4);
+            lineY += fontLayout.current.fontSize + 5;
+            let text5 = {
+                text: "Last Game: " + lastGameScore,
+                x: fontLayout.current.textLeft,
+                y: fontLayout.current.textTop + lineY
+            }
+            scoreText.current.push(text5);
+            lineY += fontLayout.current.fontSize + 5;
+            // Determine the high score
+            let highScore = 0;
+            if (scoreTable.length) {
+                highScore = Math.max(...scoreTable.map(item => item.score));
+            }
+            let text6 = {
+                text: "High Score: " + highScore,
+                x: fontLayout.current.textLeft,
+                y: fontLayout.current.textTop + lineY
+            }
+            scoreText.current.push(text6);
 
-        setScoreTextState(scoreText.current);
-        setFontLayoutState(fontLayout.current);
-
-    }, [gameScore, lastGameScore, scoreTable, bugCount, gameNum, scoreChartScaleX, scoreChartScaleY])
+            setScoreTextState(scoreText.current);
+            setFontLayoutState(fontLayout.current);
+        }
+    }, [gameScore, lastGameScore, scoreTable, bugCount, gameNum, scoreChartDataState, scoreChartScaleX, scoreChartScaleY])
 
     const clearGameEnd = useCallback(() => {
         console.log("Clearing gameEnd");
