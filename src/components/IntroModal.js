@@ -23,7 +23,7 @@ export default function IntroModal({setIntroDone}) {
                     touch off.
                 </p>
                 <p>
-                    If you move the swatter over the edge of stage, touch off or release the
+                    If you move the swatter over the edge of the stage, touch off or release the
                     click button, touch or click somewhere else on the stage and then click
                     or touch on the swatter again.
                 </p>

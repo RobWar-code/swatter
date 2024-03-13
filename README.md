@@ -14,7 +14,7 @@ strike scores points.
 
 The layout consists of a window alcove with curtains and ornaments on
 the shelving within and in front of the alcove. The alcove image
-is 490 x 475 px to allow for mobiles. The scoring graphic appears
+is scalable to allow for mobiles etc. The scoring graphic appears
 to the right of the stage on wide screens and below it on smaller.
 
 ### Preliminary Visual Design Discursive
@@ -26,21 +26,19 @@ the game play and the visuals are ideal, in practice, we must set
 budgetary constraints and game-play is the most significant factor.
 
 I have used DALL-E to obtain visualisations and to experiment to see
-how much drafting can be automated, and have come to the conclusion
-that there is generally not much time saving using DALL-E for draft
-images, but there is substantial visualisation utility, which can be
-used to improve quality. Time can be saved by using DALL-E to provide
-draft template drawings.
+how much drafting can be automated, athere is substantial visualisation utility, 
+which can be used to improve quality. Much time can be saved by using DALL-E to 
+provide draft template drawings.
 
 ### Layout Options
 
 Since the game is to be played online on mobiles or laptops tablets
-we can use the dimensions from 490 x 500px to 1200 x 500px for the
-stage area.
+we can use a scalable image for the presentation.
 
 The decision is then whether to provide a uniform game stage for
 all resolutions and use the spare screen space for scores etc. Or
-whether to enhance the game stage for larger displays.
+whether to enhance the game stage for larger displays. In this
+case it was decided to scale the image.
 
 The primary advantage of having a uniform game stage is commonality
 of game play and equivalence of scores etc. across platforms. So
@@ -60,21 +58,14 @@ to "represent" a 3D location, to add a flavour of realism.
 ### Image Formats
 
 The choice for the design is between raster and vector or a combination
-of the two. The swatter would best be done vector style, so that the
-background image is correctly presented as it moves.
+of the two. In practice, raster images with transparent backgrounds are
+the most appropriate, not least because DALL-E produces .png or .webp
+images. 
 
 The ornaments are presented in two forms, broken and complete. So they
-could be designed as individual .svgs to be inserted appropriately.
-To do individual .png edits would require a combinatorial number of
-different scenes, so is impractical, other than for the static 
-background. Unless we stick to a maximum of 4 ornaments.
+could be designed as individual .png's to be inserted appropriately.
 
-This means that about 50 svg images must be created if we have
-25 ornaments. 10 ornaments allows for variety and simpler scoring
-as well as allowing larger scale, without compromising the game
-play too much.
-
-The other option is to have .png ornaments with transparent backgrounds
+The choice is to have .png ornaments with transparent backgrounds
 and this would suit using DALL-E better. These take about an hour
 to prepare from DALL-E's presentatiations and have the advantage
 of preserving detail.
@@ -82,10 +73,10 @@ of preserving detail.
 
 ### Ornaments
 
-To fit well into the background image ornaments are about 50 x 70px
-(say between 30 x 30 and 90 x 100) so the originals must be attractively
-scalable to these dimensions. They should preferably be of the form
-of victoriana, monochrome, if traced, or hand-drawn if coloured (pastels).
+To fit well into the background image ornaments are about 80 x 100px
+so the originals must be attractively scalable to these dimensions. 
+They should preferably be of the form of victoriana, monochrome, 
+if traced, or hand-drawn if coloured (pastels).
 
 #### Ornament Production
 
@@ -123,9 +114,9 @@ them results in the ornaments breaking. The landing zones are recorded in
 the file public/static/graphics/prop-files.json. Once an ornament is broken
 the landing zone is disabled.
 
-One bug at a time appears in the stage zone. Ten bugs are provided for each
-game, with a time limit of 3 minutes to strike them down. Bugs sit still
-for a maximum of 4 seconds.
+One bug at a time appears in the stage zone. Five bugs are provided for each
+game, with a time limit of of 2.5 minutes to strike them down. Bugs sit still
+for a maximum of 1 second.
 
 ### Swatter
 
@@ -134,7 +125,7 @@ to strike the bugs. It is directed by moving the cursor about the stage
 area, and the strike action is activated by mouse click or touch-up.
 Touch down on mobiles must be on the swatter. The positioning point on
 the swatter is top center. The graphic has a tilted view to briefly show
-the strike action (1.5 sec).
+the strike action.
 
 ### Sounds
 Sounds are provided for the bug when it is flying, for a successful swat,
@@ -143,7 +134,7 @@ stage. A sound toggle is provided.
 
 ### Score Sheet
 
-The score sheet is a graphic with text, 490 pixels wide.
+The score sheet is a graphic with text, scalable.
 
 The text provided uses the Kaushan local font, and contains the
 following:
@@ -161,30 +152,18 @@ A tabular graphic in game score order, with game number and score.
 
 ### Flight Paths
 
-The flight paths of the bugs cover in the whole stage area in a looping 
-motion, beginning on the right and the buzzing back and forth and around
-for the time period allocated. The motion steps are set to be made at
-tick intervals (1/60 sec).
+The flight paths of the bugs cover in the whole stage area in a looping
+or zig-zag motion, beginning on the right and the buzzing back and forth 
+and around for the time period allocated. The motion steps are set to be made at
+ticker intervals (1/60 sec).
 
 The trajectory of the bug is biased in the horizontal, drifting toward
 the vertical as it approaches the edges of the stage and having a small
 random chance of change elsewhere. The changes in direction are
-accelerations, so that curved trajectories are produced.
+accelerations, so that curved trajectories can be produced.
 
-When the direction of motion brings the bug to a minimum of 8% of the
-width of the stage, the curvature of the path is set to ensure that
-it is does not direct the bug across the edge of the stage. ie:
-
-sX = uXt + aXt^2 = edgeX - dX 
-=> aX = ((edgeX - dX) - uXt)/t^2
-
-Where t is edgeX - dX / meanVelocity
-
-And dX is determined as the minimum approach to the edge.
-
-An edgeAvoidance flag is set once this is established, so that random changes
-are not made to the flight path, other than different edge avoidance. This
-remains in place until the path is in the opposite direction to the edge.
+When the direction of motion brings the bug to an edge, the velocity in that
+vector is reversed.
 
 Apart from this, as the bug flies, it's accelerations can be modified by
 5% every 10 ticks with a bias for the same sign, with a maximum speed 
@@ -192,6 +171,7 @@ calculated from the width of the stage, and a minimum speed of 1/5 of this.
 
 
 ## Code Set-up
+
     npx create-react-app
     npm install react-router-dom
     npm install pixi.js @pixi/react
@@ -208,9 +188,15 @@ Start Date: 29/01/2024
 
 | Item                                   | Est. Time       | Actual Time
 | -------------------------------------- | --------------- | ------------ |
-| Preliminary Design and feasibility     | 5               |              |
+| Preliminary Design and feasibility     | 5               | 7            |
 | Design and Sketches                    | 14              | 11           |
-| Score sheet                            | 3               |              |
-| Integration of Sketches with code      | 10              |              |
-| Game Play and Code                     | 20              |              |
-| Margin of Error                        | 8
+| Score sheet                            | 3               | 2            |
+| Integration of Sketches with code      | 10              | 6            |
+| Game Play and Code                     | 20              | 26           |
+| Systems Test                           | 2               |              |
+| Margin of Error                        | 8               |              |
+| 
+
+## Systems Testing
+
+See: [Systems Test](systems-test.md)

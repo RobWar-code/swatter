@@ -2,6 +2,18 @@ Work Log
 
 <h1>Work Due
 
+    Update the README
+    
+    Notes on state management
+
+    Systems Test
+
+    Release
+
+<h2>Work Done
+
+    12/03/2024
+
     * Do score table page
 
     ? Allow for swatter over edge of stage - how best to fix
@@ -20,19 +32,13 @@ Work Log
 
     * Add sound enable control
 
-        Replace the sounds that have commercial restrictions
+        * Replace the sounds that have commercial restrictions
 
     * Include game pause button on control panel
 
-    Game Credits
+    * Game Credits
 
     * Include difficulty level slider
-
-    Update the README
-    
-    Notes on state management
-
-<h2>Work Done
 
     06/03/2024
 
