@@ -92,9 +92,9 @@ Check whether score chart updated
 
 ! Check that entries are in descending order by score
 
-Bug: Scores in table duplicated when viewed during game end.
+! Bug: Scores in table duplicated when viewed during game end.
 
-Check that the text does not overspill the display area
+! Check that the text does not overspill the display area
 
 ## Credits
 

@@ -23,7 +23,9 @@ export default function GamePage() {
         bugCount,
         setBugCount,
         introDone,
-        setIntroDone
+        setIntroDone,
+        gameEndCurrent,
+        setGameEndCurrent
     }] = useOutletContext();
     const [stageWidth, setStageWidth] = useState(390);
     const [stageHeight, setStageHeight] = useState(375);
@@ -119,18 +121,27 @@ export default function GamePage() {
         setResetOrnaments(true);
         setLastGameScore(gameScore);
         setGameScore(0);
-    }, [gameScore, setBugCount, setGameNum, setGameScore, setLastGameScore])
+        setGameEndCurrent(false);
+    }, [gameScore, setBugCount, setGameNum, setGameScore, setLastGameScore, setGameEndCurrent])
 
     // Do the end of game scoring
     useEffect(() => {
-        if (bugCount <= 0) {
+        if (bugCount <= 0 && !gameEndCurrent) {
             setGameEnd(true);
+            setGameEndCurrent(true);
             setScoreTable(prev => [...prev, {score: gameScore, gameNum: gameNum}]);
             setTimeout(() => {
                 setGameStartStates();
-            }, 10000);
+            }, 9000);
         }
-    }, [bugCount, gameNum, gameScore, setScoreTable, setGameStartStates])
+    }, [
+        bugCount, 
+        gameNum, 
+        gameScore, 
+        setScoreTable, 
+        setGameStartStates, 
+        gameEndCurrent, 
+        setGameEndCurrent])
 
     useEffect(() => {
         if (swatterSwiped) {
