@@ -205,13 +205,13 @@ export default function GamePage() {
                         gameEnd={gameEnd}
                         setGameEnd={setGameEnd}
                     />
+                    {!introDone &&
+                        <IntroModal setIntroDone={setIntroDone} />
+                    }
                 </Col>
-                {!introDone &&
-                    <IntroModal setIntroDone={setIntroDone} />
-                }
             </Row>
             <Row>
-                <Col md={6}>
+                <Col lg={6}>
                     <SoundControl 
                         className="soundControl"
                         soundEnabled={soundEnabled} 
@@ -221,7 +221,7 @@ export default function GamePage() {
                     />
                     <PauseControl pauseOn={pauseOn} setPauseOn={setPauseOn} />
                 </Col>
-                <Col className="text-center" md={6}>
+                <Col className="text-center" lg={6}>
                     <EaseControl gameEase={gameEase} setGameEase={setGameEase} />
                 </Col>
             </Row>
