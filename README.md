@@ -192,6 +192,8 @@ Deploy the application
 
 View it to test the deployment
 
+Site: https://swatter-87473ffea70e.herokuapp.com/
+
 ## Schedule
 
 The following schedule is based on a budget of 12 man weeks (72 days),

@@ -161,7 +161,7 @@ export default function GamePage() {
     return (
         <Container>
             <Row>
-                <Col ref={stageCol} className="text-center" md={6}>
+                <Col ref={stageCol} className="text-center" lg={6}>
                     <GameStage
                         stageWidth={stageWidth}
                         stageHeight={stageHeight}
@@ -190,7 +190,7 @@ export default function GamePage() {
                         pauseOn={pauseOn}
                     />
                 </Col>
-                <Col className="text-center" md={6}>
+                <Col className="text-center" lg={6}>
                     <ScoreChart
                         globalImageData={globalImageData}
                         scoreChartWidth={scoreChartWidth}
