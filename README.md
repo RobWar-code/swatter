@@ -172,12 +172,26 @@ calculated from the width of the stage, and a minimum speed of 1/5 of this.
 
 ## Code Set-up
 
-    npx create-react-app
-    npm install react-router-dom
-    npm install pixi.js @pixi/react
-    npm install react-bootstrap
-    npm install webfontloader
+npx create-react-app
+npm install react-router-dom
+npm install pixi.js @pixi/react
+npm install react-bootstrap
+npm install webfontloader
     
+## Release Procedures
+
+At the vs-code terminal type npm run build
+
+login to the heroku site
+
+click Add application
+
+Work through the inputs
+
+Deploy the application
+
+View it to test the deployment
+
 ## Schedule
 
 The following schedule is based on a budget of 12 man weeks (72 days),
