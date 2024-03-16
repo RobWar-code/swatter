@@ -139,7 +139,7 @@ export default function ScoreChart({
     }, [gameEnd, clearGameEnd])
 
     return (
-        <Stage width={scoreChartWidth} height={scoreChartHeight}>
+        <Stage width={scoreChartWidth} height={scoreChartHeight} eventMode={"none"}>
             {!initial && 
             <>
             <Sprite 
