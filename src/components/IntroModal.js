@@ -6,7 +6,8 @@ export default function IntroModal({setIntroDone}) {
         setIntroDone(true);
     }
 
-    return (
+    return (<></>);
+        /*
         <Modal 
             className="introModal"
             show="show"
@@ -18,7 +19,7 @@ export default function IntroModal({setIntroDone}) {
     
             <Modal.Body className="text-center">
                 <p>
-                    Welcome to the game Swatter - Just try to zap those bugs with the swatter. Move 
+                    Welcome to Swatter - Just try to zap those bugs with the swatter. Move 
                     the cursor over the swatter then click and hold down to move it 
                     or touch down on the swatter. To make a strike, lift the mouse button or 
                     touch off.
@@ -37,5 +38,5 @@ export default function IntroModal({setIntroDone}) {
             </Modal.Footer>
             </Modal.Dialog>
         </Modal>
-    )    
+        */
 }
