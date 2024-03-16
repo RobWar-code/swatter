@@ -106,7 +106,7 @@ Check whether score chart updated
 
 ## General
 
-Check that the browser console does not display
+! Check that the browser console does not display
 spurious messages
 
 ## Screen Sizes
@@ -126,6 +126,14 @@ spurious messages
 | Firefox  |         |              |          |
 | Opera    |         |              |          |
 | Edge     |         |              |          |
+
+### Mobile Testing
+
+Check operation on mobiles
+
+Bug: Problem with modal display
+
+Bug: Problem with using swipe-up page scrolling
 
 ## Link To Zing
 
