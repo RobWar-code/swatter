@@ -7,7 +7,8 @@ export default function IntroModal({setIntroDone}) {
     }
 
     return (
-        <Modal
+        <Modal 
+            className="introModal"
             show="show"
         >
             <Modal.Dialog>
