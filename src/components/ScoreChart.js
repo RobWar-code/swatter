@@ -139,7 +139,7 @@ export default function ScoreChart({
     }, [gameEnd, clearGameEnd])
 
     return (
-        <Stage width={scoreChartWidth} height={scoreChartHeight} eventmode={"auto"} touchaction={"auto"}>
+        <Stage width={scoreChartWidth} height={scoreChartHeight} eventmode={"static"} touchaction={"auto"}>
             {!initial && 
             <>
             <Sprite 
