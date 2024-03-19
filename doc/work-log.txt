@@ -12,6 +12,8 @@ Work Log
 
     Systems Test (production)
 
+        Overcome the console-warning on the credits page
+
 <h2>Work Done
 
     12/03/2024

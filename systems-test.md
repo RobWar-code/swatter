@@ -135,6 +135,10 @@ Bug: Problem with modal display
 
 Bug: Problem with using swipe-up page scrolling
 
+- On the score-chart image try:
+- eventMode={"static"}
+- touchaction={"auto"}
+
 ## Link To Zing
 
 Check
