@@ -6,13 +6,19 @@ Work Log
     
     Notes on state management
 
-    Systems Test (development)
+    * Systems Test (development)
 
     Release
+
+        Add link on zing games
 
     Systems Test (production)
 
         Overcome the console-warning on the credits page
+
+        Introduce page scroll section in game page for single col display
+
+        Adjust the position of ornaments on screen resize
 
 <h2>Work Done
 

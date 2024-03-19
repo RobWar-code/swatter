@@ -8,6 +8,7 @@ import IntroModal from '../components/IntroModal';
 import SoundControl from '../components/SoundControl';
 import PauseControl from '../components/PauseControl';
 import GLOBALS from '../constants/constants';
+import scrollArrow from '../assets/images/scroll-arrow.png';
 
 
 export default function GamePage() {
@@ -51,6 +52,7 @@ export default function GamePage() {
     const [soundEnabled, setSoundEnabled] = useState(false);
     const [doSound, setDoSound] = useState("");
     const [pauseOn, setPauseOn] = useState(false);
+    const [singleCol, setSingleCol] = useState(false);
 
     // Determine the stage and score chart sizes
     const determineStageSize = () => {
@@ -67,6 +69,14 @@ export default function GamePage() {
             setStageWidth(sWidth);
             setStageHeight(sHeight);
             setStageScale(scale);
+            // Determine whether single col width
+            const screenWidth = window.innerWidth;
+            if (screenWidth >= 992) {
+                setSingleCol(false);
+            }
+            else {
+                setSingleCol(true);
+            }
             // Set the score chart sizes
             setScoreChartWidth(sWidth);
             setScoreChartHeight(sHeight);
@@ -77,17 +87,20 @@ export default function GamePage() {
     // Get the alcove width and height
     useEffect(() => {
 
-        for (let i = 0; i < graphicData.length; i++) {
-            if (graphicData[i].type === "stage") {
-                alcoveWidth.current = graphicData[i].width;
-                alcoveHeight.current = graphicData[i].height;
-                break;
+        if (graphicData.length) {
+            for (let i = 0; i < graphicData.length; i++) {
+                if (graphicData[i].type === "stage") {
+                    alcoveWidth.current = graphicData[i].width;
+                    alcoveHeight.current = graphicData[i].height;
+                    break;
+                }
             }
+
             // Determine Stage Size
             determineStageSize();
+            setGlobalImageData(graphicData);
         }
 
-        setGlobalImageData(graphicData);
 
     }, [graphicData])
 
@@ -190,6 +203,11 @@ export default function GamePage() {
                         pauseOn={pauseOn}
                     />
                 </Col>
+                {singleCol && 
+                    <Col className="text-center">
+                        <img src={scrollArrow} width="40" height="60" alt="page scroll" title="On mobiles swipe to scroll"/>
+                    </Col>
+                }
                 <Col className="text-center" lg={6}>
                     <ScoreChart
                         globalImageData={globalImageData}

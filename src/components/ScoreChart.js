@@ -144,8 +144,6 @@ export default function ScoreChart({
             <>
             <Sprite 
                 image={scoreChartDataState.image}
-                eventMode={"static"}
-                touchaction={"auto"}
                 scale={{x:scoreChartScaleX, y:scoreChartScaleY}}
                 anchor={{x:0, y:0}}
                 x={0}

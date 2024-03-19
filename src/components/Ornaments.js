@@ -19,8 +19,9 @@ export default function Ornaments({
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
-
+    const [gotOrnamentData, setGotOrnamentData] = useState(false);
     const [initial, setInitial] = useState(true);
+    const [drawDue, setDrawDue] = useState(false);
 
     // Get the ornament data
     useEffect(() => {
@@ -32,35 +33,36 @@ export default function Ornaments({
                 }
             }
             setInitial(false);
+            setGotOrnamentData(true);
         }
     }, [globalImageData, initial])
 
     // Set the additional data in the ornament data
     useEffect(() => {
-        if (ornamentData.current) {
+        if (gotOrnamentData) {
+            console.log("stageScale:", stageScale);
             for (let i = 0; i < ornamentData.current.length; i++) {
                 let ornament = ornamentData.current[i];
                 ornament.isBroken = false;
                 ornament.id = i + 1;
                 // Set the whole image details
-                let ornamentWhole = ornament.whole;
-                ornamentWhole.image = `${process.env.PUBLIC_URL}/static/graphics/${ornamentWhole.file}`;
-                ornamentWhole.actualX = ornamentWhole.x * stageScale;
-                ornamentWhole.actualY = ornamentWhole.y * stageScale;
-                ornamentWhole.actualWidth = ornamentWhole.width * stageScale;
-                ornamentWhole.actualHeight = ornamentWhole.height * stageScale;
+                ornament.whole.image = `${process.env.PUBLIC_URL}/static/graphics/${ornament.whole.file}`;
+                ornament.whole.actualX = ornament.whole.x * stageScale;
+                ornament.whole.actualY = ornament.whole.y * stageScale;
+                ornament.whole.actualWidth = ornament.whole.width * stageScale;
+                ornament.whole.actualHeight = ornament.whole.height * stageScale;
 
                 // Set the broken ornament image details
-                let ornamentBroken = ornament.broken;
-                ornamentBroken.image = `${process.env.PUBLIC_URL}/static/graphics/${ornamentBroken.file}`;
-                ornamentBroken.actualX = ornamentBroken.x * stageScale;
-                ornamentBroken.actualY = ornamentBroken.y * stageScale;
-                ornamentBroken.actualWidth = ornamentBroken.width * stageScale;
-                ornamentBroken.actualHeight = ornamentBroken.height * stageScale;
+                ornament.broken.image = `${process.env.PUBLIC_URL}/static/graphics/${ornament.broken.file}`;
+                ornament.broken.actualX = ornament.broken.x * stageScale;
+                ornament.broken.actualY = ornament.broken.y * stageScale;
+                ornament.broken.actualWidth = ornament.broken.width * stageScale;
+                ornament.broken.actualHeight = ornament.broken.height * stageScale;
             }
             setOrnamentDataState(ornamentData.current);
+            setDrawDue(true);
         }
-    }, [stageScale])
+    }, [gotOrnamentData, stageScale])
 
     // Check whether an ornament has been broken
     useEffect(() => {
@@ -128,7 +130,7 @@ export default function Ornaments({
 
     return (
         <>
-        {!initial && (
+        {drawDue && (
             <>
             {ornamentDataState.map((item, index) => {
                 let representation = item.whole;
