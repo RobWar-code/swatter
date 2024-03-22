@@ -15,13 +15,14 @@ export default function Ornaments({
     setSittingDue,
     resetOrnaments,
     setResetOrnaments,
-    setDoSound
+    setDoSound,
+    ornamentDrawReady,
+    setOrnamentDrawReady
 }) {
     const ornamentData = useRef();
     const [ornamentDataState, setOrnamentDataState] = useState([]);
     const [gotOrnamentData, setGotOrnamentData] = useState(false);
     const [initial, setInitial] = useState(true);
-    const [drawDue, setDrawDue] = useState(false);
 
     // Get the ornament data
     useEffect(() => {
@@ -39,8 +40,7 @@ export default function Ornaments({
 
     // Set the additional data in the ornament data
     useEffect(() => {
-        if (gotOrnamentData) {
-            console.log("stageScale:", stageScale);
+        if (gotOrnamentData && !ornamentDrawReady) {
             for (let i = 0; i < ornamentData.current.length; i++) {
                 let ornament = ornamentData.current[i];
                 ornament.isBroken = false;
@@ -60,9 +60,9 @@ export default function Ornaments({
                 ornament.broken.actualHeight = ornament.broken.height * stageScale;
             }
             setOrnamentDataState(ornamentData.current);
-            setDrawDue(true);
+            setOrnamentDrawReady(true);
         }
-    }, [gotOrnamentData, stageScale])
+    }, [gotOrnamentData, stageScale, ornamentDrawReady, setOrnamentDrawReady])
 
     // Check whether an ornament has been broken
     useEffect(() => {
@@ -130,7 +130,7 @@ export default function Ornaments({
 
     return (
         <>
-        {drawDue && (
+        {ornamentDrawReady && (
             <>
             {ornamentDataState.map((item, index) => {
                 let representation = item.whole;

@@ -53,6 +53,7 @@ export default function GamePage() {
     const [doSound, setDoSound] = useState("");
     const [pauseOn, setPauseOn] = useState(false);
     const [singleCol, setSingleCol] = useState(false);
+    const [ornamentDrawReady, setOrnamentDrawReady] = useState(false);
 
     // Determine the stage and score chart sizes
     const determineStageSize = () => {
@@ -82,6 +83,7 @@ export default function GamePage() {
             setScoreChartHeight(sHeight);
             setScoreChartScaleX(sWidth/1024);
             setScoreChartScaleY(sHeight/1024);
+            setOrnamentDrawReady(false);
     };
 
     // Get the alcove width and height
@@ -201,6 +203,8 @@ export default function GamePage() {
                         gameEnd={gameEnd}
                         setDoSound={setDoSound}
                         pauseOn={pauseOn}
+                        ornamentDrawReady={ornamentDrawReady}
+                        setOrnamentDrawReady={setOrnamentDrawReady}
                     />
                 </Col>
                 {singleCol && 

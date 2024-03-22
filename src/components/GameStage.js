@@ -29,7 +29,9 @@ export default function GameStage({
     introDone,
     gameEnd,
     setDoSound,
-    pauseOn
+    pauseOn,
+    ornamentDrawReady,
+    setOrnamentDrawReady
 }) {
     const [bugStart, setBugStart] = useState(false);
     const [requestBugSitting, setRequestBugSitting] = useState("");
@@ -62,6 +64,8 @@ export default function GameStage({
                 resetOrnaments={resetOrnaments}
                 setResetOrnaments={setResetOrnaments}
                 setDoSound={setDoSound}
+                ornamentDrawReady={ornamentDrawReady}
+                setOrnamentDrawReady={setOrnamentDrawReady}
             />
             {introDone &&
             <Bug 

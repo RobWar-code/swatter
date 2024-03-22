@@ -7,6 +7,7 @@ General Notes on Coding for this project
         Sprite Array Fragment
         Animated Bitmap Images
         React State Management
+            Using State to Drive Redraws in a Child Component
             Preserving States on Page Components
         Using timeOut Functions in useEffect Functions
         Local Fonts for PIXI
@@ -172,6 +173,17 @@ General Notes on Coding for this project
 
     Then use another state to collect the result
         [myComponentData, setMyComponentData] = useState({})
+
+<h2>Using State to Drive Redraws in a Child Component
+
+    Where a child component has redraws triggered by events in the parent
+    component and the child uses useEffect() to prepare for a redraw, then
+    the need to perform this task should a state established in the parent ie:
+        setChildDrawReady(false)
+
+    Perform the calculative useEffect() in the child component and then
+    redraft as in:
+        {childDrawReady && <MyChildElement />}
 
 <h2>Preserving States on Page Components
 
