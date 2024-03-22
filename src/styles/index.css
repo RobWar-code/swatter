@@ -8,11 +8,11 @@
 }
 
 .introModal {
-    width: 90%;
+    width: 350px !important;
 }
 
 .introText {
-    width: 90%;
+    width: 300px !important;
 }
 
 .toolButton {
