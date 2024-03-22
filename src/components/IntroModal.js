@@ -6,8 +6,8 @@ export default function IntroModal({setIntroDone}) {
         setIntroDone(true);
     }
 
-    return (<></>);
-        /*
+    return (
+        <>
         <Modal 
             className="introModal"
             show="show"
@@ -38,5 +38,6 @@ export default function IntroModal({setIntroDone}) {
             </Modal.Footer>
             </Modal.Dialog>
         </Modal>
-        */
+        </>
+        )
 }
