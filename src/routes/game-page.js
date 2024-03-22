@@ -176,6 +176,9 @@ export default function GamePage() {
     return (
         <Container>
             <Row>
+                {!introDone &&
+                    <IntroModal setIntroDone={setIntroDone} />
+                }
                 <Col ref={stageCol} className="text-center" lg={6}>
                     <GameStage
                         stageWidth={stageWidth}
@@ -227,9 +230,6 @@ export default function GamePage() {
                         gameEnd={gameEnd}
                         setGameEnd={setGameEnd}
                     />
-                    {!introDone &&
-                        <IntroModal setIntroDone={setIntroDone} />
-                    }
                 </Col>
             </Row>
             <Row>
