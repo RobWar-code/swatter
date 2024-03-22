@@ -209,7 +209,8 @@ Start Date: 29/01/2024
 | Score sheet                            | 3               | 2            |
 | Integration of Sketches with code      | 10              | 6            |
 | Game Play and Code                     | 20              | 26           |
-| Systems Test                           | 2               |              |
+| Systems Test                           | 2               | 4            |
+| Fix Bugs								 | 8               |              |
 | Margin of Error                        | 8               |              |
 | 
 

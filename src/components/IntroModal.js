@@ -17,7 +17,7 @@ export default function IntroModal({setIntroDone}) {
                 <Modal.Title>SWATTER</Modal.Title>
             </Modal.Header>
     
-            <Modal.Body className="text-center">
+            <Modal.Body className="text-center introText">
                 <p>
                     Welcome to Swatter - Just try to zap those bugs with the swatter. Move 
                     the cursor over the swatter then click and hold down to move it 
