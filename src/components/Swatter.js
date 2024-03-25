@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import * as PIXI from 'pixi.js';
 import {Sprite} from '@pixi/react';
+import GLOBALS from '../constants/constants.js'
 
 export default function Swatter({   
     stageWidth, 
@@ -132,8 +133,10 @@ export default function Swatter({
             setSwatterStrikeY(swatterData.current.y);
             setSwatterDataState(swatterData.current);
             // Check for swat
-            if (bugX > swatterData.current.x - 8 && bugX < swatterData.current.x + 8 &&
-                bugY > swatterData.current.y - 20 && bugY < swatterData.current.y + 20) {
+            if (bugX > swatterData.current.x - GLOBALS.bugStrikeMarginLeft && 
+                bugX < swatterData.current.x + GLOBALS.bugStrikeMarginRight &&
+                bugY > swatterData.current.y - GLOBALS.bugStrikeMarginTop && 
+                bugY < swatterData.current.y + GLOBALS.bugStrikeMarginBottom) {
                 setBugHit(true);
             }
         }

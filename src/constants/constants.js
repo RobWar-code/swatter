@@ -9,10 +9,14 @@ const GLOBALS = {
     bugReactionDistance: 50,
     ornamentAttraction: 0.8,
     sitChance: 0.003,
-    sitTime: 150,
+    sitTime: 120,
     bugsPerGame: 5,
     bugHitScore: 10,
-    ornamentBreakScore: -5
+    ornamentBreakScore: -5,
+    bugStrikeMarginLeft: 12,
+    bugStrikeMarginRight: 12,
+    bugStrikeMarginTop: 15,
+    bugStrikeMarginBottom: 25
 }
 
 export default GLOBALS;
