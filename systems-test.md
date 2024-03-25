@@ -1,6 +1,6 @@
 # Swatter Systems Test Sheet
 
-Items OK'd are marked with a !. Second ! indicates tested on mobile.
+Items OK'd are marked with a !.
 
 ## Game Intro
 
@@ -122,23 +122,19 @@ spurious messages
 
 |          | Game    | Score Sheet  | Credits  |
 | -------- | ------- | ------------ | -------- |
-| Chrome   |         |              |          |
-| Firefox  |         |              |          |
-| Opera    |         |              |          |
-| Edge     |         |              |          |
+| Chrome   |    *    |      *       |     *    |
+| Firefox  |    *    |      *       |     *    |
+| Opera    |    *    |      *       |     *    |
+| Edge     |    *    |      *       |     *    |
 
 ### Mobile Testing
 
-Check operation on mobiles
+! Check operation on mobiles
 
-Bug: Problem with modal display
+! Bug: Problem with modal display
 
-Bug: Problem with using swipe-up page scrolling
-
-- On the score-chart image try:
-- eventMode={"static"}
-- touchaction={"auto"}
+! Bug: Problem with using swipe-up page scrolling
 
 ## Link To Zing
 
-Check
+! Check

@@ -2,28 +2,31 @@ Work Log
 
 <h1>Work Due
 
-    Update the README
+
+<h2>Work Done
+
+    25/03/2024
     
-    Notes on state management
+    * Update the README
+    
+    * Notes on state management
 
     * Systems Test (development)
 
-    Release
+    * Release
 
-        Add link on zing games
+        * Add link on zing games
 
-    Systems Test (production)
+    * Systems Test (production)
     
-        Fix mobile problem with intro modal
+        * Fix mobile problem with intro modal
 
-        Overcome the console-warning on the credits page
+        * Overcome the console-warning on the credits page
 
         * Introduce page scroll section in game page for single col display
 
         * Adjust the position of ornaments on screen resize
-
-<h2>Work Done
-
+        
     12/03/2024
 
     * Do score table page

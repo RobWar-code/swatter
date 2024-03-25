@@ -11,6 +11,7 @@ General Notes on Coding for this project
             Preserving States on Page Components
         Using timeOut Functions in useEffect Functions
         Local Fonts for PIXI
+        React Bootstrap Modal Problem
 
 <h1>Using the Webpack Context for Images
 
@@ -246,3 +247,8 @@ General Notes on Coding for this project
 
     Then use the font-family: "myFont" in the Text sprite.
 
+<h1>React Bootstrap Modal Problem
+
+    Visual operation of the react-bootstrap modal is not guaranteed
+    to work on android mobiles. Use a custom html/css modal
+    construct instead.

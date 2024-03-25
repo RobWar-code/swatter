@@ -208,11 +208,13 @@ Start Date: 29/01/2024
 | Design and Sketches                    | 14              | 11           |
 | Score sheet                            | 3               | 2            |
 | Integration of Sketches with code      | 10              | 6            |
-| Game Play and Code                     | 20              | 26           |
-| Systems Test                           | 2               | 4            |
-| Fix Bugs								 | 8               |              |
+| Game Play and Code                     | 20              | 23           |
+| Systems Test                           | 2               | 2            |
+| Fix Bugs								 | 8               | 4            |
 | Margin of Error                        | 8               |              |
-| 
+|                       TOTAL            | 70              | 56           |
+
+Completion Date: 25/03/2024
 
 ## Systems Testing
 
