@@ -2,7 +2,12 @@ Work Log
 
 <h1>Work Due
 
+    * Get App working on the localhost
 
+    Change the menu item zing to home (/ directory)
+
+    Get git working for this project
+    
 <h2>Work Done
 
     25/03/2024

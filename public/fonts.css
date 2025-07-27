@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "Kaushan";
+    src: url("/swatter/static/fonts/KaushanScript-Regular.otf") format("opentype");
+}
+
+.navItem:hover {
+    background-color: beige;
+}
+
+.introModal {
+    display: flex;
+    position: fixed;
+    width: 95%;
+    height: 100%;
+    z-index: 900;
+    background-color: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+}
+
+.introDialog {
+    position: relative;
+    width: 75%;
+    max-width: 450px;
+    background-color: rgba(255, 140, 50, 1);
+    text-align: center;
+    padding: 6px;
+}
+
+.toolButton {
+    margin-right: 5px;
+}

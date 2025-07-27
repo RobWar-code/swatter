@@ -40,7 +40,7 @@ export default function Root() {
         WebFont.load({
             custom: {
                 families: ['Kaushan'],
-                urls: ['../styles/index.css']
+                urls: [process.env.PUBLIC_URL + '/fonts.css']
             },
             active: () => {
                 console.log("Font Loaded")
